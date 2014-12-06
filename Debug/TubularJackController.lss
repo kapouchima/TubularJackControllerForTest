@@ -3,29 +3,27 @@ TubularJackController.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000cc8  00000000  00000000  00000094  2**1
+  0 .text         00000b48  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000002  00800060  00000cc8  00000d5c  2**0
-                  CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000030  00800062  00800062  00000d5e  2**0
+  1 .bss          00000028  00800060  00800060  00000bbc  2**0
                   ALLOC
-  3 .stab         000006cc  00000000  00000000  00000d60  2**2
+  2 .stab         000006cc  00000000  00000000  00000bbc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00000085  00000000  00000000  0000142c  2**0
+  3 .stabstr      00000085  00000000  00000000  00001288  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_aranges 000000c0  00000000  00000000  000014b8  2**3
+  4 .debug_aranges 000000c0  00000000  00000000  00001310  2**3
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000009a4  00000000  00000000  00001578  2**0
+  5 .debug_info   00000913  00000000  00000000  000013d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000279  00000000  00000000  00001f1c  2**0
+  6 .debug_abbrev 00000264  00000000  00000000  00001ce3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000005e0  00000000  00000000  00002195  2**0
+  7 .debug_line   000005c3  00000000  00000000  00001f47  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000274  00000000  00000000  00002778  2**2
+  8 .debug_frame  0000023c  00000000  00000000  0000250c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000002a9  00000000  00000000  000029ec  2**0
+  9 .debug_str    0000021e  00000000  00000000  00002748  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000625  00000000  00000000  00002c95  2**0
+ 10 .debug_loc    00000560  00000000  00000000  00002966  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -63,18 +61,18 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	e8 ec       	ldi	r30, 0xC8	; 200
-  3a:	fc e0       	ldi	r31, 0x0C	; 12
+  38:	e8 e4       	ldi	r30, 0x48	; 72
+  3a:	fb e0       	ldi	r31, 0x0B	; 11
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
   40:	0d 92       	st	X+, r0
-  42:	a2 36       	cpi	r26, 0x62	; 98
+  42:	a0 36       	cpi	r26, 0x60	; 96
   44:	b1 07       	cpc	r27, r17
   46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
 
 00000048 <__do_clear_bss>:
   48:	10 e0       	ldi	r17, 0x00	; 0
-  4a:	a2 e6       	ldi	r26, 0x62	; 98
+  4a:	a0 e6       	ldi	r26, 0x60	; 96
   4c:	b0 e0       	ldi	r27, 0x00	; 0
   4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
 
@@ -82,11 +80,11 @@ Disassembly of section .text:
   50:	1d 92       	st	X+, r1
 
 00000052 <.do_clear_bss_start>:
-  52:	a2 39       	cpi	r26, 0x92	; 146
+  52:	a8 38       	cpi	r26, 0x88	; 136
   54:	b1 07       	cpc	r27, r17
   56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
-  58:	2f d6       	rcall	.+3166   	; 0xcb8 <main>
-  5a:	34 c6       	rjmp	.+3176   	; 0xcc4 <_exit>
+  58:	70 d5       	rcall	.+2784   	; 0xb3a <main>
+  5a:	74 c5       	rjmp	.+2792   	; 0xb44 <_exit>
 
 0000005c <__bad_interrupt>:
   5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
@@ -115,27 +113,27 @@ ISR(INT0_vect)
   7a:	ef 93       	push	r30
   7c:	ff 93       	push	r31
 	if(RemotePulseA==0)
-  7e:	80 91 81 00 	lds	r24, 0x0081
+  7e:	80 91 77 00 	lds	r24, 0x0077
   82:	88 23       	and	r24, r24
   84:	09 f0       	breq	.+2      	; 0x88 <__vector_1+0x2a>
   86:	60 c0       	rjmp	.+192    	; 0x148 <__vector_1+0xea>
 	{
 		RemotePulseA++;
   88:	81 e0       	ldi	r24, 0x01	; 1
-  8a:	80 93 81 00 	sts	0x0081, r24
+  8a:	80 93 77 00 	sts	0x0077, r24
 		TCNT1H=0;
   8e:	1d bc       	out	0x2d, r1	; 45
 		TCNT1L=0;
   90:	1c bc       	out	0x2c, r1	; 44
 		RefreshTime=Time+50;
-  92:	50 91 6b 00 	lds	r21, 0x006B
-  96:	40 91 6c 00 	lds	r20, 0x006C
-  9a:	30 91 6d 00 	lds	r19, 0x006D
-  9e:	20 91 6e 00 	lds	r18, 0x006E
-  a2:	90 91 6f 00 	lds	r25, 0x006F
-  a6:	f0 91 70 00 	lds	r31, 0x0070
-  aa:	e0 91 71 00 	lds	r30, 0x0071
-  ae:	a0 91 72 00 	lds	r26, 0x0072
+  92:	50 91 61 00 	lds	r21, 0x0061
+  96:	40 91 62 00 	lds	r20, 0x0062
+  9a:	30 91 63 00 	lds	r19, 0x0063
+  9e:	20 91 64 00 	lds	r18, 0x0064
+  a2:	90 91 65 00 	lds	r25, 0x0065
+  a6:	f0 91 66 00 	lds	r31, 0x0066
+  aa:	e0 91 67 00 	lds	r30, 0x0067
+  ae:	a0 91 68 00 	lds	r26, 0x0068
   b2:	75 2f       	mov	r23, r21
   b4:	7e 5c       	subi	r23, 0xCE	; 206
   b6:	61 e0       	ldi	r22, 0x01	; 1
@@ -191,39 +189,39 @@ ISR(INT0_vect)
  11a:	e0 e0       	ldi	r30, 0x00	; 0
  11c:	8e 2b       	or	r24, r30
  11e:	8a 0f       	add	r24, r26
- 120:	70 93 79 00 	sts	0x0079, r23
- 124:	60 93 7a 00 	sts	0x007A, r22
- 128:	50 93 7b 00 	sts	0x007B, r21
- 12c:	40 93 7c 00 	sts	0x007C, r20
- 130:	30 93 7d 00 	sts	0x007D, r19
- 134:	20 93 7e 00 	sts	0x007E, r18
- 138:	90 93 7f 00 	sts	0x007F, r25
- 13c:	80 93 80 00 	sts	0x0080, r24
+ 120:	70 93 6f 00 	sts	0x006F, r23
+ 124:	60 93 70 00 	sts	0x0070, r22
+ 128:	50 93 71 00 	sts	0x0071, r21
+ 12c:	40 93 72 00 	sts	0x0072, r20
+ 130:	30 93 73 00 	sts	0x0073, r19
+ 134:	20 93 74 00 	sts	0x0074, r18
+ 138:	90 93 75 00 	sts	0x0075, r25
+ 13c:	80 93 76 00 	sts	0x0076, r24
 	}
 	
 	if(RemotePulseA>0)
- 140:	80 91 81 00 	lds	r24, 0x0081
+ 140:	80 91 77 00 	lds	r24, 0x0077
  144:	88 23       	and	r24, r24
  146:	d1 f0       	breq	.+52     	; 0x17c <__vector_1+0x11e>
 	{
 		RemotePulseA++;
  148:	8f 5f       	subi	r24, 0xFF	; 255
- 14a:	80 93 81 00 	sts	0x0081, r24
+ 14a:	80 93 77 00 	sts	0x0077, r24
 		if(RemotePulseA>4)
  14e:	85 30       	cpi	r24, 0x05	; 5
  150:	a8 f0       	brcs	.+42     	; 0x17c <__vector_1+0x11e>
 	{RemoteAFlag=1;RemotePulseA=0;RefreshTime=0;}
  152:	81 e0       	ldi	r24, 0x01	; 1
- 154:	80 93 77 00 	sts	0x0077, r24
- 158:	10 92 81 00 	sts	0x0081, r1
- 15c:	10 92 79 00 	sts	0x0079, r1
- 160:	10 92 7a 00 	sts	0x007A, r1
- 164:	10 92 7b 00 	sts	0x007B, r1
- 168:	10 92 7c 00 	sts	0x007C, r1
- 16c:	10 92 7d 00 	sts	0x007D, r1
- 170:	10 92 7e 00 	sts	0x007E, r1
- 174:	10 92 7f 00 	sts	0x007F, r1
- 178:	10 92 80 00 	sts	0x0080, r1
+ 154:	80 93 6d 00 	sts	0x006D, r24
+ 158:	10 92 77 00 	sts	0x0077, r1
+ 15c:	10 92 6f 00 	sts	0x006F, r1
+ 160:	10 92 70 00 	sts	0x0070, r1
+ 164:	10 92 71 00 	sts	0x0071, r1
+ 168:	10 92 72 00 	sts	0x0072, r1
+ 16c:	10 92 73 00 	sts	0x0073, r1
+ 170:	10 92 74 00 	sts	0x0074, r1
+ 174:	10 92 75 00 	sts	0x0075, r1
+ 178:	10 92 76 00 	sts	0x0076, r1
 	}
 }
  17c:	ff 91       	pop	r31
@@ -266,27 +264,27 @@ ISR(INT1_vect)
  1b8:	ef 93       	push	r30
  1ba:	ff 93       	push	r31
 	if(RemotePulseB==0)
- 1bc:	80 91 78 00 	lds	r24, 0x0078
+ 1bc:	80 91 6e 00 	lds	r24, 0x006E
  1c0:	88 23       	and	r24, r24
  1c2:	09 f0       	breq	.+2      	; 0x1c6 <__vector_2+0x2a>
  1c4:	60 c0       	rjmp	.+192    	; 0x286 <__vector_2+0xea>
 	{
 		RemotePulseB++;
  1c6:	81 e0       	ldi	r24, 0x01	; 1
- 1c8:	80 93 78 00 	sts	0x0078, r24
+ 1c8:	80 93 6e 00 	sts	0x006E, r24
 		TCNT1H=0;
  1cc:	1d bc       	out	0x2d, r1	; 45
 		TCNT1L=0;
  1ce:	1c bc       	out	0x2c, r1	; 44
 		RefreshTime=Time+50;
- 1d0:	50 91 6b 00 	lds	r21, 0x006B
- 1d4:	40 91 6c 00 	lds	r20, 0x006C
- 1d8:	30 91 6d 00 	lds	r19, 0x006D
- 1dc:	20 91 6e 00 	lds	r18, 0x006E
- 1e0:	90 91 6f 00 	lds	r25, 0x006F
- 1e4:	f0 91 70 00 	lds	r31, 0x0070
- 1e8:	e0 91 71 00 	lds	r30, 0x0071
- 1ec:	a0 91 72 00 	lds	r26, 0x0072
+ 1d0:	50 91 61 00 	lds	r21, 0x0061
+ 1d4:	40 91 62 00 	lds	r20, 0x0062
+ 1d8:	30 91 63 00 	lds	r19, 0x0063
+ 1dc:	20 91 64 00 	lds	r18, 0x0064
+ 1e0:	90 91 65 00 	lds	r25, 0x0065
+ 1e4:	f0 91 66 00 	lds	r31, 0x0066
+ 1e8:	e0 91 67 00 	lds	r30, 0x0067
+ 1ec:	a0 91 68 00 	lds	r26, 0x0068
  1f0:	75 2f       	mov	r23, r21
  1f2:	7e 5c       	subi	r23, 0xCE	; 206
  1f4:	61 e0       	ldi	r22, 0x01	; 1
@@ -342,39 +340,39 @@ ISR(INT1_vect)
  258:	e0 e0       	ldi	r30, 0x00	; 0
  25a:	8e 2b       	or	r24, r30
  25c:	8a 0f       	add	r24, r26
- 25e:	70 93 79 00 	sts	0x0079, r23
- 262:	60 93 7a 00 	sts	0x007A, r22
- 266:	50 93 7b 00 	sts	0x007B, r21
- 26a:	40 93 7c 00 	sts	0x007C, r20
- 26e:	30 93 7d 00 	sts	0x007D, r19
- 272:	20 93 7e 00 	sts	0x007E, r18
- 276:	90 93 7f 00 	sts	0x007F, r25
- 27a:	80 93 80 00 	sts	0x0080, r24
+ 25e:	70 93 6f 00 	sts	0x006F, r23
+ 262:	60 93 70 00 	sts	0x0070, r22
+ 266:	50 93 71 00 	sts	0x0071, r21
+ 26a:	40 93 72 00 	sts	0x0072, r20
+ 26e:	30 93 73 00 	sts	0x0073, r19
+ 272:	20 93 74 00 	sts	0x0074, r18
+ 276:	90 93 75 00 	sts	0x0075, r25
+ 27a:	80 93 76 00 	sts	0x0076, r24
 	}
 	
 	if(RemotePulseB>0)
- 27e:	80 91 78 00 	lds	r24, 0x0078
+ 27e:	80 91 6e 00 	lds	r24, 0x006E
  282:	88 23       	and	r24, r24
  284:	d1 f0       	breq	.+52     	; 0x2ba <__vector_2+0x11e>
 	{
 		RemotePulseB++;
  286:	8f 5f       	subi	r24, 0xFF	; 255
- 288:	80 93 78 00 	sts	0x0078, r24
+ 288:	80 93 6e 00 	sts	0x006E, r24
 		if(RemotePulseB>4)
  28c:	85 30       	cpi	r24, 0x05	; 5
  28e:	a8 f0       	brcs	.+42     	; 0x2ba <__vector_2+0x11e>
 			{RemoteBFlag=1;RemotePulseB=0;RefreshTime=0;}
  290:	81 e0       	ldi	r24, 0x01	; 1
- 292:	80 93 76 00 	sts	0x0076, r24
- 296:	10 92 78 00 	sts	0x0078, r1
- 29a:	10 92 79 00 	sts	0x0079, r1
- 29e:	10 92 7a 00 	sts	0x007A, r1
- 2a2:	10 92 7b 00 	sts	0x007B, r1
- 2a6:	10 92 7c 00 	sts	0x007C, r1
- 2aa:	10 92 7d 00 	sts	0x007D, r1
- 2ae:	10 92 7e 00 	sts	0x007E, r1
- 2b2:	10 92 7f 00 	sts	0x007F, r1
- 2b6:	10 92 80 00 	sts	0x0080, r1
+ 292:	80 93 6c 00 	sts	0x006C, r24
+ 296:	10 92 6e 00 	sts	0x006E, r1
+ 29a:	10 92 6f 00 	sts	0x006F, r1
+ 29e:	10 92 70 00 	sts	0x0070, r1
+ 2a2:	10 92 71 00 	sts	0x0071, r1
+ 2a6:	10 92 72 00 	sts	0x0072, r1
+ 2aa:	10 92 73 00 	sts	0x0073, r1
+ 2ae:	10 92 74 00 	sts	0x0074, r1
+ 2b2:	10 92 75 00 	sts	0x0075, r1
+ 2b6:	10 92 76 00 	sts	0x0076, r1
 	}
 }
  2ba:	ff 91       	pop	r31
@@ -422,14 +420,14 @@ ISR(TIMER0_OVF_vect)
  300:	ef 93       	push	r30
  302:	ff 93       	push	r31
 	Time++;
- 304:	40 91 6b 00 	lds	r20, 0x006B
- 308:	30 91 6c 00 	lds	r19, 0x006C
- 30c:	20 91 6d 00 	lds	r18, 0x006D
- 310:	90 91 6e 00 	lds	r25, 0x006E
- 314:	80 91 6f 00 	lds	r24, 0x006F
- 318:	f0 91 70 00 	lds	r31, 0x0070
- 31c:	e0 91 71 00 	lds	r30, 0x0071
- 320:	a0 91 72 00 	lds	r26, 0x0072
+ 304:	40 91 61 00 	lds	r20, 0x0061
+ 308:	30 91 62 00 	lds	r19, 0x0062
+ 30c:	20 91 63 00 	lds	r18, 0x0063
+ 310:	90 91 64 00 	lds	r25, 0x0064
+ 314:	80 91 65 00 	lds	r24, 0x0065
+ 318:	f0 91 66 00 	lds	r31, 0x0066
+ 31c:	e0 91 67 00 	lds	r30, 0x0067
+ 320:	a0 91 68 00 	lds	r26, 0x0068
  324:	64 2f       	mov	r22, r20
  326:	6f 5f       	subi	r22, 0xFF	; 255
  328:	51 e0       	ldi	r21, 0x01	; 1
@@ -493,40 +491,40 @@ ISR(TIMER0_OVF_vect)
  39c:	a9 2f       	mov	r26, r25
  39e:	f8 2f       	mov	r31, r24
  3a0:	e7 2f       	mov	r30, r23
- 3a2:	60 93 6b 00 	sts	0x006B, r22
- 3a6:	50 93 6c 00 	sts	0x006C, r21
- 3aa:	40 93 6d 00 	sts	0x006D, r20
- 3ae:	30 93 6e 00 	sts	0x006E, r19
- 3b2:	20 93 6f 00 	sts	0x006F, r18
- 3b6:	90 93 70 00 	sts	0x0070, r25
- 3ba:	80 93 71 00 	sts	0x0071, r24
- 3be:	70 93 72 00 	sts	0x0072, r23
+ 3a2:	60 93 61 00 	sts	0x0061, r22
+ 3a6:	50 93 62 00 	sts	0x0062, r21
+ 3aa:	40 93 63 00 	sts	0x0063, r20
+ 3ae:	30 93 64 00 	sts	0x0064, r19
+ 3b2:	20 93 65 00 	sts	0x0065, r18
+ 3b6:	90 93 66 00 	sts	0x0066, r25
+ 3ba:	80 93 67 00 	sts	0x0067, r24
+ 3be:	70 93 68 00 	sts	0x0068, r23
 	FlasherCounter++;
- 3c2:	80 91 62 00 	lds	r24, 0x0062
+ 3c2:	80 91 60 00 	lds	r24, 0x0060
  3c6:	8f 5f       	subi	r24, 0xFF	; 255
- 3c8:	80 93 62 00 	sts	0x0062, r24
+ 3c8:	80 93 60 00 	sts	0x0060, r24
 	if(FlasherCounter>=FlasherDelay)
  3cc:	86 32       	cpi	r24, 0x26	; 38
  3ce:	48 f0       	brcs	.+18     	; 0x3e2 <__vector_9+0x108>
 	{
 		FlasherCounter=0;
- 3d0:	10 92 62 00 	sts	0x0062, r1
+ 3d0:	10 92 60 00 	sts	0x0060, r1
 		FlasherState=!FlasherState;	  
  3d4:	81 e0       	ldi	r24, 0x01	; 1
- 3d6:	90 91 73 00 	lds	r25, 0x0073
+ 3d6:	90 91 69 00 	lds	r25, 0x0069
  3da:	91 11       	cpse	r25, r1
  3dc:	80 e0       	ldi	r24, 0x00	; 0
- 3de:	80 93 73 00 	sts	0x0073, r24
+ 3de:	80 93 69 00 	sts	0x0069, r24
 	}
 	if((Time>=RefreshTime)&&(RefreshTime))
- 3e2:	70 91 79 00 	lds	r23, 0x0079
- 3e6:	80 91 7a 00 	lds	r24, 0x007A
- 3ea:	60 91 7b 00 	lds	r22, 0x007B
- 3ee:	50 91 7c 00 	lds	r21, 0x007C
- 3f2:	40 91 7d 00 	lds	r20, 0x007D
- 3f6:	30 91 7e 00 	lds	r19, 0x007E
- 3fa:	20 91 7f 00 	lds	r18, 0x007F
- 3fe:	90 91 80 00 	lds	r25, 0x0080
+ 3e2:	70 91 6f 00 	lds	r23, 0x006F
+ 3e6:	80 91 70 00 	lds	r24, 0x0070
+ 3ea:	60 91 71 00 	lds	r22, 0x0071
+ 3ee:	50 91 72 00 	lds	r21, 0x0072
+ 3f2:	40 91 73 00 	lds	r20, 0x0073
+ 3f6:	30 91 74 00 	lds	r19, 0x0074
+ 3fa:	20 91 75 00 	lds	r18, 0x0075
+ 3fe:	90 91 76 00 	lds	r25, 0x0076
  402:	e9 17       	cp	r30, r25
  404:	c0 f1       	brcs	.+112    	; 0x476 <__stack+0x17>
  406:	9e 17       	cp	r25, r30
@@ -566,16 +564,16 @@ ISR(TIMER0_OVF_vect)
  44a:	89 2b       	or	r24, r25
  44c:	a1 f0       	breq	.+40     	; 0x476 <__stack+0x17>
 	  {RemotePulseA=0;RemotePulseB=0;RefreshTime=0;}
- 44e:	10 92 81 00 	sts	0x0081, r1
- 452:	10 92 78 00 	sts	0x0078, r1
- 456:	10 92 79 00 	sts	0x0079, r1
- 45a:	10 92 7a 00 	sts	0x007A, r1
- 45e:	10 92 7b 00 	sts	0x007B, r1
- 462:	10 92 7c 00 	sts	0x007C, r1
- 466:	10 92 7d 00 	sts	0x007D, r1
- 46a:	10 92 7e 00 	sts	0x007E, r1
- 46e:	10 92 7f 00 	sts	0x007F, r1
- 472:	10 92 80 00 	sts	0x0080, r1
+ 44e:	10 92 77 00 	sts	0x0077, r1
+ 452:	10 92 6e 00 	sts	0x006E, r1
+ 456:	10 92 6f 00 	sts	0x006F, r1
+ 45a:	10 92 70 00 	sts	0x0070, r1
+ 45e:	10 92 71 00 	sts	0x0071, r1
+ 462:	10 92 72 00 	sts	0x0072, r1
+ 466:	10 92 73 00 	sts	0x0073, r1
+ 46a:	10 92 74 00 	sts	0x0074, r1
+ 46e:	10 92 75 00 	sts	0x0075, r1
+ 472:	10 92 76 00 	sts	0x0076, r1
  476:	ff 91       	pop	r31
  478:	ef 91       	pop	r30
  47a:	df 91       	pop	r29
@@ -654,7 +652,7 @@ void StopMotor(void)
  4ca:	c1 98       	cbi	0x18, 1	; 24
  4cc:	c0 98       	cbi	0x18, 0	; 24
 	FlasherFlag=0;	
- 4ce:	10 92 74 00 	sts	0x0074, r1
+ 4ce:	10 92 6a 00 	sts	0x006A, r1
 }
  4d2:	08 95       	ret
 
@@ -666,7 +664,7 @@ void StartMotor(char dir)
 {
 	FlasherFlag=1;
  4d4:	91 e0       	ldi	r25, 0x01	; 1
- 4d6:	90 93 74 00 	sts	0x0074, r25
+ 4d6:	90 93 6a 00 	sts	0x006A, r25
 	if(dir==Open)
  4da:	81 30       	cpi	r24, 0x01	; 1
  4dc:	19 f4       	brne	.+6      	; 0x4e4 <StartMotor+0x10>
@@ -692,976 +690,795 @@ void StartMotor(char dir)
 
 void State0(void) // closed
 {
-	if((RemoteAFlag)||(!OpenKey)||(TestTrigger))
- 4ee:	80 91 77 00 	lds	r24, 0x0077
+	if((RemoteAFlag)||(!OpenKey))
+ 4ee:	80 91 6d 00 	lds	r24, 0x006D
  4f2:	88 23       	and	r24, r24
- 4f4:	31 f4       	brne	.+12     	; 0x502 <State0+0x14>
- 4f6:	99 9b       	sbis	0x13, 1	; 19
- 4f8:	04 c0       	rjmp	.+8      	; 0x502 <State0+0x14>
- 4fa:	80 91 60 00 	lds	r24, 0x0060
- 4fe:	88 23       	and	r24, r24
- 500:	89 f1       	breq	.+98     	; 0x564 <State0+0x76>
+ 4f4:	11 f4       	brne	.+4      	; 0x4fa <State0+0xc>
+ 4f6:	99 99       	sbic	0x13, 1	; 19
+ 4f8:	31 c0       	rjmp	.+98     	; 0x55c <State0+0x6e>
 	{
 		RemoteAFlag=0;
- 502:	10 92 77 00 	sts	0x0077, r1
+ 4fa:	10 92 6d 00 	sts	0x006D, r1
 		LEDSet;
- 506:	94 98       	cbi	0x12, 4	; 18
+ 4fe:	94 98       	cbi	0x12, 4	; 18
 		MotorStartTime=Time;
- 508:	80 91 6b 00 	lds	r24, 0x006B
- 50c:	80 93 8a 00 	sts	0x008A, r24
- 510:	80 91 6c 00 	lds	r24, 0x006C
- 514:	80 93 8b 00 	sts	0x008B, r24
- 518:	80 91 6d 00 	lds	r24, 0x006D
- 51c:	80 93 8c 00 	sts	0x008C, r24
- 520:	80 91 6e 00 	lds	r24, 0x006E
- 524:	80 93 8d 00 	sts	0x008D, r24
- 528:	80 91 6f 00 	lds	r24, 0x006F
- 52c:	80 93 8e 00 	sts	0x008E, r24
- 530:	80 91 70 00 	lds	r24, 0x0070
- 534:	80 93 8f 00 	sts	0x008F, r24
- 538:	80 91 71 00 	lds	r24, 0x0071
- 53c:	80 93 90 00 	sts	0x0090, r24
- 540:	80 91 72 00 	lds	r24, 0x0072
- 544:	80 93 91 00 	sts	0x0091, r24
+ 500:	80 91 61 00 	lds	r24, 0x0061
+ 504:	80 93 80 00 	sts	0x0080, r24
+ 508:	80 91 62 00 	lds	r24, 0x0062
+ 50c:	80 93 81 00 	sts	0x0081, r24
+ 510:	80 91 63 00 	lds	r24, 0x0063
+ 514:	80 93 82 00 	sts	0x0082, r24
+ 518:	80 91 64 00 	lds	r24, 0x0064
+ 51c:	80 93 83 00 	sts	0x0083, r24
+ 520:	80 91 65 00 	lds	r24, 0x0065
+ 524:	80 93 84 00 	sts	0x0084, r24
+ 528:	80 91 66 00 	lds	r24, 0x0066
+ 52c:	80 93 85 00 	sts	0x0085, r24
+ 530:	80 91 67 00 	lds	r24, 0x0067
+ 534:	80 93 86 00 	sts	0x0086, r24
+ 538:	80 91 68 00 	lds	r24, 0x0068
+ 53c:	80 93 87 00 	sts	0x0087, r24
 		StartMotor(Open);
- 548:	81 e0       	ldi	r24, 0x01	; 1
- 54a:	c4 df       	rcall	.-120    	; 0x4d4 <StartMotor>
+ 540:	81 e0       	ldi	r24, 0x01	; 1
+ 542:	c8 df       	rcall	.-112    	; 0x4d4 <StartMotor>
 		State=1;
- 54c:	81 e0       	ldi	r24, 0x01	; 1
- 54e:	80 93 75 00 	sts	0x0075, r24
+ 544:	81 e0       	ldi	r24, 0x01	; 1
+ 546:	80 93 6b 00 	sts	0x006B, r24
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 552:	8f e3       	ldi	r24, 0x3F	; 63
- 554:	92 e4       	ldi	r25, 0x42	; 66
- 556:	af e0       	ldi	r26, 0x0F	; 15
- 558:	81 50       	subi	r24, 0x01	; 1
- 55a:	90 40       	sbci	r25, 0x00	; 0
- 55c:	a0 40       	sbci	r26, 0x00	; 0
- 55e:	e1 f7       	brne	.-8      	; 0x558 <State0+0x6a>
- 560:	00 c0       	rjmp	.+0      	; 0x562 <State0+0x74>
- 562:	00 00       	nop
- 564:	08 95       	ret
+ 54a:	8f e3       	ldi	r24, 0x3F	; 63
+ 54c:	92 e4       	ldi	r25, 0x42	; 66
+ 54e:	af e0       	ldi	r26, 0x0F	; 15
+ 550:	81 50       	subi	r24, 0x01	; 1
+ 552:	90 40       	sbci	r25, 0x00	; 0
+ 554:	a0 40       	sbci	r26, 0x00	; 0
+ 556:	e1 f7       	brne	.-8      	; 0x550 <State0+0x62>
+ 558:	00 c0       	rjmp	.+0      	; 0x55a <State0+0x6c>
+ 55a:	00 00       	nop
+ 55c:	08 95       	ret
 
-00000566 <State1>:
+0000055e <State1>:
 
 
 
 
 void State1(void) //openning
 {
- 566:	cf 92       	push	r12
- 568:	df 92       	push	r13
- 56a:	ef 92       	push	r14
- 56c:	ff 92       	push	r15
- 56e:	0f 93       	push	r16
- 570:	1f 93       	push	r17
- 572:	cf 93       	push	r28
- 574:	df 93       	push	r29
+ 55e:	cf 92       	push	r12
+ 560:	df 92       	push	r13
+ 562:	ef 92       	push	r14
+ 564:	ff 92       	push	r15
+ 566:	0f 93       	push	r16
+ 568:	1f 93       	push	r17
+ 56a:	cf 93       	push	r28
+ 56c:	df 93       	push	r29
 	if((RemoteAFlag)||(!StopKey)||(!CloseKey))
- 576:	80 91 77 00 	lds	r24, 0x0077
- 57a:	88 23       	and	r24, r24
- 57c:	21 f4       	brne	.+8      	; 0x586 <State1+0x20>
- 57e:	9a 9b       	sbis	0x13, 2	; 19
- 580:	02 c0       	rjmp	.+4      	; 0x586 <State1+0x20>
- 582:	9b 99       	sbic	0x13, 3	; 19
- 584:	31 c0       	rjmp	.+98     	; 0x5e8 <State1+0x82>
+ 56e:	80 91 6d 00 	lds	r24, 0x006D
+ 572:	88 23       	and	r24, r24
+ 574:	21 f4       	brne	.+8      	; 0x57e <State1+0x20>
+ 576:	9a 9b       	sbis	0x13, 2	; 19
+ 578:	02 c0       	rjmp	.+4      	; 0x57e <State1+0x20>
+ 57a:	9b 99       	sbic	0x13, 3	; 19
+ 57c:	2f c0       	rjmp	.+94     	; 0x5dc <State1+0x7e>
 	{
 		RemoteAFlag=0;
- 586:	10 92 77 00 	sts	0x0077, r1
+ 57e:	10 92 6d 00 	sts	0x006D, r1
 		MotorStopTime=Time;
- 58a:	80 91 6b 00 	lds	r24, 0x006B
- 58e:	80 93 82 00 	sts	0x0082, r24
- 592:	80 91 6c 00 	lds	r24, 0x006C
- 596:	80 93 83 00 	sts	0x0083, r24
- 59a:	80 91 6d 00 	lds	r24, 0x006D
- 59e:	80 93 84 00 	sts	0x0084, r24
- 5a2:	80 91 6e 00 	lds	r24, 0x006E
- 5a6:	80 93 85 00 	sts	0x0085, r24
- 5aa:	80 91 6f 00 	lds	r24, 0x006F
- 5ae:	80 93 86 00 	sts	0x0086, r24
- 5b2:	80 91 70 00 	lds	r24, 0x0070
- 5b6:	80 93 87 00 	sts	0x0087, r24
- 5ba:	80 91 71 00 	lds	r24, 0x0071
- 5be:	80 93 88 00 	sts	0x0088, r24
- 5c2:	80 91 72 00 	lds	r24, 0x0072
- 5c6:	80 93 89 00 	sts	0x0089, r24
+ 582:	80 91 61 00 	lds	r24, 0x0061
+ 586:	80 93 78 00 	sts	0x0078, r24
+ 58a:	80 91 62 00 	lds	r24, 0x0062
+ 58e:	80 93 79 00 	sts	0x0079, r24
+ 592:	80 91 63 00 	lds	r24, 0x0063
+ 596:	80 93 7a 00 	sts	0x007A, r24
+ 59a:	80 91 64 00 	lds	r24, 0x0064
+ 59e:	80 93 7b 00 	sts	0x007B, r24
+ 5a2:	80 91 65 00 	lds	r24, 0x0065
+ 5a6:	80 93 7c 00 	sts	0x007C, r24
+ 5aa:	80 91 66 00 	lds	r24, 0x0066
+ 5ae:	80 93 7d 00 	sts	0x007D, r24
+ 5b2:	80 91 67 00 	lds	r24, 0x0067
+ 5b6:	80 93 7e 00 	sts	0x007E, r24
+ 5ba:	80 91 68 00 	lds	r24, 0x0068
+ 5be:	80 93 7f 00 	sts	0x007F, r24
 		StopMotor();
- 5ca:	7f df       	rcall	.-258    	; 0x4ca <StopMotor>
+ 5c2:	83 df       	rcall	.-250    	; 0x4ca <StopMotor>
 		State=2;
- 5cc:	82 e0       	ldi	r24, 0x02	; 2
- 5ce:	80 93 75 00 	sts	0x0075, r24
- 5d2:	8f e3       	ldi	r24, 0x3F	; 63
- 5d4:	92 e4       	ldi	r25, 0x42	; 66
- 5d6:	af e0       	ldi	r26, 0x0F	; 15
- 5d8:	81 50       	subi	r24, 0x01	; 1
- 5da:	90 40       	sbci	r25, 0x00	; 0
- 5dc:	a0 40       	sbci	r26, 0x00	; 0
- 5de:	e1 f7       	brne	.-8      	; 0x5d8 <State1+0x72>
- 5e0:	00 c0       	rjmp	.+0      	; 0x5e2 <State1+0x7c>
- 5e2:	00 00       	nop
+ 5c4:	82 e0       	ldi	r24, 0x02	; 2
+ 5c6:	80 93 6b 00 	sts	0x006B, r24
+ 5ca:	8f e3       	ldi	r24, 0x3F	; 63
+ 5cc:	92 e4       	ldi	r25, 0x42	; 66
+ 5ce:	af e0       	ldi	r26, 0x0F	; 15
+ 5d0:	81 50       	subi	r24, 0x01	; 1
+ 5d2:	90 40       	sbci	r25, 0x00	; 0
+ 5d4:	a0 40       	sbci	r26, 0x00	; 0
+ 5d6:	e1 f7       	brne	.-8      	; 0x5d0 <State1+0x72>
+ 5d8:	00 c0       	rjmp	.+0      	; 0x5da <State1+0x7c>
+ 5da:	00 00       	nop
 		_delay_ms(500);
-		TestTrigger=0;
- 5e4:	10 92 60 00 	sts	0x0060, r1
 	}
 	
 	if(Time>(MotorStartTime+ActionTime))
- 5e8:	c0 90 6b 00 	lds	r12, 0x006B
- 5ec:	d0 90 6c 00 	lds	r13, 0x006C
- 5f0:	e0 90 6d 00 	lds	r14, 0x006D
- 5f4:	f0 90 6e 00 	lds	r15, 0x006E
- 5f8:	00 91 6f 00 	lds	r16, 0x006F
- 5fc:	10 91 70 00 	lds	r17, 0x0070
- 600:	d0 91 71 00 	lds	r29, 0x0071
- 604:	a0 91 72 00 	lds	r26, 0x0072
- 608:	80 91 8a 00 	lds	r24, 0x008A
- 60c:	60 91 8b 00 	lds	r22, 0x008B
- 610:	40 91 8c 00 	lds	r20, 0x008C
- 614:	30 91 8d 00 	lds	r19, 0x008D
- 618:	20 91 8e 00 	lds	r18, 0x008E
- 61c:	f0 91 8f 00 	lds	r31, 0x008F
- 620:	e0 91 90 00 	lds	r30, 0x0090
- 624:	c0 91 91 00 	lds	r28, 0x0091
- 628:	b8 2f       	mov	r27, r24
- 62a:	bc 58       	subi	r27, 0x8C	; 140
- 62c:	51 e0       	ldi	r21, 0x01	; 1
- 62e:	b8 17       	cp	r27, r24
- 630:	08 f0       	brcs	.+2      	; 0x634 <State1+0xce>
- 632:	50 e0       	ldi	r21, 0x00	; 0
- 634:	86 2f       	mov	r24, r22
- 636:	8c 5f       	subi	r24, 0xFC	; 252
- 638:	91 e0       	ldi	r25, 0x01	; 1
- 63a:	86 17       	cp	r24, r22
- 63c:	08 f0       	brcs	.+2      	; 0x640 <State1+0xda>
- 63e:	90 e0       	ldi	r25, 0x00	; 0
- 640:	58 0f       	add	r21, r24
- 642:	61 e0       	ldi	r22, 0x01	; 1
- 644:	58 17       	cp	r21, r24
- 646:	08 f0       	brcs	.+2      	; 0x64a <State1+0xe4>
- 648:	60 e0       	ldi	r22, 0x00	; 0
- 64a:	96 2b       	or	r25, r22
- 64c:	85 2f       	mov	r24, r21
- 64e:	74 2f       	mov	r23, r20
- 650:	50 e0       	ldi	r21, 0x00	; 0
- 652:	94 0f       	add	r25, r20
- 654:	41 e0       	ldi	r20, 0x01	; 1
- 656:	97 17       	cp	r25, r23
- 658:	08 f0       	brcs	.+2      	; 0x65c <State1+0xf6>
- 65a:	40 e0       	ldi	r20, 0x00	; 0
- 65c:	54 2b       	or	r21, r20
- 65e:	79 2f       	mov	r23, r25
- 660:	40 e0       	ldi	r20, 0x00	; 0
- 662:	53 0f       	add	r21, r19
- 664:	91 e0       	ldi	r25, 0x01	; 1
- 666:	53 17       	cp	r21, r19
- 668:	08 f0       	brcs	.+2      	; 0x66c <State1+0x106>
- 66a:	90 e0       	ldi	r25, 0x00	; 0
- 66c:	49 2b       	or	r20, r25
- 66e:	65 2f       	mov	r22, r21
- 670:	30 e0       	ldi	r19, 0x00	; 0
- 672:	42 0f       	add	r20, r18
- 674:	91 e0       	ldi	r25, 0x01	; 1
- 676:	42 17       	cp	r20, r18
- 678:	08 f0       	brcs	.+2      	; 0x67c <State1+0x116>
- 67a:	90 e0       	ldi	r25, 0x00	; 0
- 67c:	39 2b       	or	r19, r25
- 67e:	54 2f       	mov	r21, r20
- 680:	20 e0       	ldi	r18, 0x00	; 0
- 682:	3f 0f       	add	r19, r31
- 684:	91 e0       	ldi	r25, 0x01	; 1
- 686:	3f 17       	cp	r19, r31
- 688:	08 f0       	brcs	.+2      	; 0x68c <State1+0x126>
- 68a:	90 e0       	ldi	r25, 0x00	; 0
- 68c:	29 2b       	or	r18, r25
- 68e:	43 2f       	mov	r20, r19
- 690:	3e 2f       	mov	r19, r30
- 692:	90 e0       	ldi	r25, 0x00	; 0
- 694:	2e 0f       	add	r18, r30
- 696:	e1 e0       	ldi	r30, 0x01	; 1
- 698:	23 17       	cp	r18, r19
- 69a:	08 f0       	brcs	.+2      	; 0x69e <State1+0x138>
- 69c:	e0 e0       	ldi	r30, 0x00	; 0
- 69e:	9e 2b       	or	r25, r30
- 6a0:	9c 0f       	add	r25, r28
- 6a2:	9a 17       	cp	r25, r26
- 6a4:	e0 f0       	brcs	.+56     	; 0x6de <State1+0x178>
- 6a6:	a9 17       	cp	r26, r25
- 6a8:	71 f5       	brne	.+92     	; 0x706 <State1+0x1a0>
- 6aa:	2d 17       	cp	r18, r29
- 6ac:	c0 f0       	brcs	.+48     	; 0x6de <State1+0x178>
- 6ae:	d2 17       	cp	r29, r18
- 6b0:	51 f5       	brne	.+84     	; 0x706 <State1+0x1a0>
- 6b2:	41 17       	cp	r20, r17
- 6b4:	a0 f0       	brcs	.+40     	; 0x6de <State1+0x178>
- 6b6:	14 17       	cp	r17, r20
- 6b8:	31 f5       	brne	.+76     	; 0x706 <State1+0x1a0>
- 6ba:	50 17       	cp	r21, r16
- 6bc:	80 f0       	brcs	.+32     	; 0x6de <State1+0x178>
- 6be:	05 17       	cp	r16, r21
- 6c0:	11 f5       	brne	.+68     	; 0x706 <State1+0x1a0>
- 6c2:	6f 15       	cp	r22, r15
- 6c4:	60 f0       	brcs	.+24     	; 0x6de <State1+0x178>
- 6c6:	f6 16       	cp	r15, r22
- 6c8:	f1 f4       	brne	.+60     	; 0x706 <State1+0x1a0>
- 6ca:	7e 15       	cp	r23, r14
- 6cc:	40 f0       	brcs	.+16     	; 0x6de <State1+0x178>
- 6ce:	e7 16       	cp	r14, r23
- 6d0:	d1 f4       	brne	.+52     	; 0x706 <State1+0x1a0>
- 6d2:	8d 15       	cp	r24, r13
- 6d4:	20 f0       	brcs	.+8      	; 0x6de <State1+0x178>
- 6d6:	d8 16       	cp	r13, r24
- 6d8:	b1 f4       	brne	.+44     	; 0x706 <State1+0x1a0>
- 6da:	bc 15       	cp	r27, r12
- 6dc:	a0 f4       	brcc	.+40     	; 0x706 <State1+0x1a0>
+ 5dc:	c0 90 61 00 	lds	r12, 0x0061
+ 5e0:	d0 90 62 00 	lds	r13, 0x0062
+ 5e4:	e0 90 63 00 	lds	r14, 0x0063
+ 5e8:	f0 90 64 00 	lds	r15, 0x0064
+ 5ec:	00 91 65 00 	lds	r16, 0x0065
+ 5f0:	10 91 66 00 	lds	r17, 0x0066
+ 5f4:	d0 91 67 00 	lds	r29, 0x0067
+ 5f8:	a0 91 68 00 	lds	r26, 0x0068
+ 5fc:	80 91 80 00 	lds	r24, 0x0080
+ 600:	60 91 81 00 	lds	r22, 0x0081
+ 604:	40 91 82 00 	lds	r20, 0x0082
+ 608:	30 91 83 00 	lds	r19, 0x0083
+ 60c:	20 91 84 00 	lds	r18, 0x0084
+ 610:	f0 91 85 00 	lds	r31, 0x0085
+ 614:	e0 91 86 00 	lds	r30, 0x0086
+ 618:	c0 91 87 00 	lds	r28, 0x0087
+ 61c:	b8 2f       	mov	r27, r24
+ 61e:	bc 58       	subi	r27, 0x8C	; 140
+ 620:	51 e0       	ldi	r21, 0x01	; 1
+ 622:	b8 17       	cp	r27, r24
+ 624:	08 f0       	brcs	.+2      	; 0x628 <State1+0xca>
+ 626:	50 e0       	ldi	r21, 0x00	; 0
+ 628:	86 2f       	mov	r24, r22
+ 62a:	8c 5f       	subi	r24, 0xFC	; 252
+ 62c:	91 e0       	ldi	r25, 0x01	; 1
+ 62e:	86 17       	cp	r24, r22
+ 630:	08 f0       	brcs	.+2      	; 0x634 <State1+0xd6>
+ 632:	90 e0       	ldi	r25, 0x00	; 0
+ 634:	58 0f       	add	r21, r24
+ 636:	61 e0       	ldi	r22, 0x01	; 1
+ 638:	58 17       	cp	r21, r24
+ 63a:	08 f0       	brcs	.+2      	; 0x63e <State1+0xe0>
+ 63c:	60 e0       	ldi	r22, 0x00	; 0
+ 63e:	96 2b       	or	r25, r22
+ 640:	85 2f       	mov	r24, r21
+ 642:	74 2f       	mov	r23, r20
+ 644:	50 e0       	ldi	r21, 0x00	; 0
+ 646:	94 0f       	add	r25, r20
+ 648:	41 e0       	ldi	r20, 0x01	; 1
+ 64a:	97 17       	cp	r25, r23
+ 64c:	08 f0       	brcs	.+2      	; 0x650 <State1+0xf2>
+ 64e:	40 e0       	ldi	r20, 0x00	; 0
+ 650:	54 2b       	or	r21, r20
+ 652:	79 2f       	mov	r23, r25
+ 654:	40 e0       	ldi	r20, 0x00	; 0
+ 656:	53 0f       	add	r21, r19
+ 658:	91 e0       	ldi	r25, 0x01	; 1
+ 65a:	53 17       	cp	r21, r19
+ 65c:	08 f0       	brcs	.+2      	; 0x660 <State1+0x102>
+ 65e:	90 e0       	ldi	r25, 0x00	; 0
+ 660:	49 2b       	or	r20, r25
+ 662:	65 2f       	mov	r22, r21
+ 664:	30 e0       	ldi	r19, 0x00	; 0
+ 666:	42 0f       	add	r20, r18
+ 668:	91 e0       	ldi	r25, 0x01	; 1
+ 66a:	42 17       	cp	r20, r18
+ 66c:	08 f0       	brcs	.+2      	; 0x670 <State1+0x112>
+ 66e:	90 e0       	ldi	r25, 0x00	; 0
+ 670:	39 2b       	or	r19, r25
+ 672:	54 2f       	mov	r21, r20
+ 674:	20 e0       	ldi	r18, 0x00	; 0
+ 676:	3f 0f       	add	r19, r31
+ 678:	91 e0       	ldi	r25, 0x01	; 1
+ 67a:	3f 17       	cp	r19, r31
+ 67c:	08 f0       	brcs	.+2      	; 0x680 <State1+0x122>
+ 67e:	90 e0       	ldi	r25, 0x00	; 0
+ 680:	29 2b       	or	r18, r25
+ 682:	43 2f       	mov	r20, r19
+ 684:	3e 2f       	mov	r19, r30
+ 686:	90 e0       	ldi	r25, 0x00	; 0
+ 688:	2e 0f       	add	r18, r30
+ 68a:	e1 e0       	ldi	r30, 0x01	; 1
+ 68c:	23 17       	cp	r18, r19
+ 68e:	08 f0       	brcs	.+2      	; 0x692 <State1+0x134>
+ 690:	e0 e0       	ldi	r30, 0x00	; 0
+ 692:	9e 2b       	or	r25, r30
+ 694:	9c 0f       	add	r25, r28
+ 696:	9a 17       	cp	r25, r26
+ 698:	e0 f0       	brcs	.+56     	; 0x6d2 <State1+0x174>
+ 69a:	a9 17       	cp	r26, r25
+ 69c:	71 f5       	brne	.+92     	; 0x6fa <State1+0x19c>
+ 69e:	2d 17       	cp	r18, r29
+ 6a0:	c0 f0       	brcs	.+48     	; 0x6d2 <State1+0x174>
+ 6a2:	d2 17       	cp	r29, r18
+ 6a4:	51 f5       	brne	.+84     	; 0x6fa <State1+0x19c>
+ 6a6:	41 17       	cp	r20, r17
+ 6a8:	a0 f0       	brcs	.+40     	; 0x6d2 <State1+0x174>
+ 6aa:	14 17       	cp	r17, r20
+ 6ac:	31 f5       	brne	.+76     	; 0x6fa <State1+0x19c>
+ 6ae:	50 17       	cp	r21, r16
+ 6b0:	80 f0       	brcs	.+32     	; 0x6d2 <State1+0x174>
+ 6b2:	05 17       	cp	r16, r21
+ 6b4:	11 f5       	brne	.+68     	; 0x6fa <State1+0x19c>
+ 6b6:	6f 15       	cp	r22, r15
+ 6b8:	60 f0       	brcs	.+24     	; 0x6d2 <State1+0x174>
+ 6ba:	f6 16       	cp	r15, r22
+ 6bc:	f1 f4       	brne	.+60     	; 0x6fa <State1+0x19c>
+ 6be:	7e 15       	cp	r23, r14
+ 6c0:	40 f0       	brcs	.+16     	; 0x6d2 <State1+0x174>
+ 6c2:	e7 16       	cp	r14, r23
+ 6c4:	d1 f4       	brne	.+52     	; 0x6fa <State1+0x19c>
+ 6c6:	8d 15       	cp	r24, r13
+ 6c8:	20 f0       	brcs	.+8      	; 0x6d2 <State1+0x174>
+ 6ca:	d8 16       	cp	r13, r24
+ 6cc:	b1 f4       	brne	.+44     	; 0x6fa <State1+0x19c>
+ 6ce:	bc 15       	cp	r27, r12
+ 6d0:	a0 f4       	brcc	.+40     	; 0x6fa <State1+0x19c>
 	{
 		MotorStopTime=Time;
- 6de:	c0 92 82 00 	sts	0x0082, r12
- 6e2:	d0 92 83 00 	sts	0x0083, r13
- 6e6:	e0 92 84 00 	sts	0x0084, r14
- 6ea:	f0 92 85 00 	sts	0x0085, r15
- 6ee:	00 93 86 00 	sts	0x0086, r16
- 6f2:	10 93 87 00 	sts	0x0087, r17
- 6f6:	d0 93 88 00 	sts	0x0088, r29
- 6fa:	a0 93 89 00 	sts	0x0089, r26
+ 6d2:	c0 92 78 00 	sts	0x0078, r12
+ 6d6:	d0 92 79 00 	sts	0x0079, r13
+ 6da:	e0 92 7a 00 	sts	0x007A, r14
+ 6de:	f0 92 7b 00 	sts	0x007B, r15
+ 6e2:	00 93 7c 00 	sts	0x007C, r16
+ 6e6:	10 93 7d 00 	sts	0x007D, r17
+ 6ea:	d0 93 7e 00 	sts	0x007E, r29
+ 6ee:	a0 93 7f 00 	sts	0x007F, r26
 		StopMotor();
- 6fe:	e5 de       	rcall	.-566    	; 0x4ca <StopMotor>
+ 6f2:	eb de       	rcall	.-554    	; 0x4ca <StopMotor>
 		State=2;
- 700:	82 e0       	ldi	r24, 0x02	; 2
- 702:	80 93 75 00 	sts	0x0075, r24
+ 6f4:	82 e0       	ldi	r24, 0x02	; 2
+ 6f6:	80 93 6b 00 	sts	0x006B, r24
 	}
 	
 	
 }
- 706:	df 91       	pop	r29
- 708:	cf 91       	pop	r28
- 70a:	1f 91       	pop	r17
- 70c:	0f 91       	pop	r16
- 70e:	ff 90       	pop	r15
- 710:	ef 90       	pop	r14
- 712:	df 90       	pop	r13
- 714:	cf 90       	pop	r12
- 716:	08 95       	ret
+ 6fa:	df 91       	pop	r29
+ 6fc:	cf 91       	pop	r28
+ 6fe:	1f 91       	pop	r17
+ 700:	0f 91       	pop	r16
+ 702:	ff 90       	pop	r15
+ 704:	ef 90       	pop	r14
+ 706:	df 90       	pop	r13
+ 708:	cf 90       	pop	r12
+ 70a:	08 95       	ret
 
-00000718 <State2>:
+0000070c <State2>:
 
 
 
 
 void State2(void) //open
 {
- 718:	df 92       	push	r13
- 71a:	ef 92       	push	r14
- 71c:	ff 92       	push	r15
- 71e:	0f 93       	push	r16
- 720:	1f 93       	push	r17
- 722:	cf 93       	push	r28
- 724:	df 93       	push	r29
-	if((RemoteAFlag)||(!CloseKey)||(TestTrigger))
- 726:	80 91 77 00 	lds	r24, 0x0077
- 72a:	88 23       	and	r24, r24
- 72c:	39 f4       	brne	.+14     	; 0x73c <State2+0x24>
- 72e:	9b 9b       	sbis	0x13, 3	; 19
- 730:	05 c0       	rjmp	.+10     	; 0x73c <State2+0x24>
- 732:	80 91 60 00 	lds	r24, 0x0060
- 736:	88 23       	and	r24, r24
- 738:	29 f4       	brne	.+10     	; 0x744 <State2+0x2c>
- 73a:	3d c0       	rjmp	.+122    	; 0x7b6 <State2+0x9e>
+ 70c:	df 92       	push	r13
+ 70e:	ef 92       	push	r14
+ 710:	ff 92       	push	r15
+ 712:	0f 93       	push	r16
+ 714:	1f 93       	push	r17
+ 716:	cf 93       	push	r28
+ 718:	df 93       	push	r29
+	if((RemoteAFlag)||(!CloseKey))
+ 71a:	80 91 6d 00 	lds	r24, 0x006D
+ 71e:	88 23       	and	r24, r24
+ 720:	11 f4       	brne	.+4      	; 0x726 <State2+0x1a>
+ 722:	9b 99       	sbic	0x13, 3	; 19
+ 724:	30 c0       	rjmp	.+96     	; 0x786 <State2+0x7a>
 	{
-		if(TestTrigger) _delay_ms(500);
- 73c:	80 91 60 00 	lds	r24, 0x0060
- 740:	88 23       	and	r24, r24
- 742:	49 f0       	breq	.+18     	; 0x756 <State2+0x3e>
- 744:	8f e3       	ldi	r24, 0x3F	; 63
- 746:	92 e4       	ldi	r25, 0x42	; 66
- 748:	af e0       	ldi	r26, 0x0F	; 15
- 74a:	81 50       	subi	r24, 0x01	; 1
- 74c:	90 40       	sbci	r25, 0x00	; 0
- 74e:	a0 40       	sbci	r26, 0x00	; 0
- 750:	e1 f7       	brne	.-8      	; 0x74a <State2+0x32>
- 752:	00 c0       	rjmp	.+0      	; 0x754 <State2+0x3c>
- 754:	00 00       	nop
 		RemoteAFlag=0;
- 756:	10 92 77 00 	sts	0x0077, r1
+ 726:	10 92 6d 00 	sts	0x006D, r1
 		MotorStartTime=Time;
- 75a:	80 91 6b 00 	lds	r24, 0x006B
- 75e:	80 93 8a 00 	sts	0x008A, r24
- 762:	80 91 6c 00 	lds	r24, 0x006C
- 766:	80 93 8b 00 	sts	0x008B, r24
- 76a:	80 91 6d 00 	lds	r24, 0x006D
- 76e:	80 93 8c 00 	sts	0x008C, r24
- 772:	80 91 6e 00 	lds	r24, 0x006E
- 776:	80 93 8d 00 	sts	0x008D, r24
- 77a:	80 91 6f 00 	lds	r24, 0x006F
- 77e:	80 93 8e 00 	sts	0x008E, r24
- 782:	80 91 70 00 	lds	r24, 0x0070
- 786:	80 93 8f 00 	sts	0x008F, r24
- 78a:	80 91 71 00 	lds	r24, 0x0071
- 78e:	80 93 90 00 	sts	0x0090, r24
- 792:	80 91 72 00 	lds	r24, 0x0072
- 796:	80 93 91 00 	sts	0x0091, r24
+ 72a:	80 91 61 00 	lds	r24, 0x0061
+ 72e:	80 93 80 00 	sts	0x0080, r24
+ 732:	80 91 62 00 	lds	r24, 0x0062
+ 736:	80 93 81 00 	sts	0x0081, r24
+ 73a:	80 91 63 00 	lds	r24, 0x0063
+ 73e:	80 93 82 00 	sts	0x0082, r24
+ 742:	80 91 64 00 	lds	r24, 0x0064
+ 746:	80 93 83 00 	sts	0x0083, r24
+ 74a:	80 91 65 00 	lds	r24, 0x0065
+ 74e:	80 93 84 00 	sts	0x0084, r24
+ 752:	80 91 66 00 	lds	r24, 0x0066
+ 756:	80 93 85 00 	sts	0x0085, r24
+ 75a:	80 91 67 00 	lds	r24, 0x0067
+ 75e:	80 93 86 00 	sts	0x0086, r24
+ 762:	80 91 68 00 	lds	r24, 0x0068
+ 766:	80 93 87 00 	sts	0x0087, r24
 		StartMotor(Close);
- 79a:	80 e0       	ldi	r24, 0x00	; 0
- 79c:	9b de       	rcall	.-714    	; 0x4d4 <StartMotor>
+ 76a:	80 e0       	ldi	r24, 0x00	; 0
+ 76c:	b3 de       	rcall	.-666    	; 0x4d4 <StartMotor>
 		State=3;
- 79e:	83 e0       	ldi	r24, 0x03	; 3
- 7a0:	80 93 75 00 	sts	0x0075, r24
- 7a4:	8f e3       	ldi	r24, 0x3F	; 63
- 7a6:	92 e4       	ldi	r25, 0x42	; 66
- 7a8:	af e0       	ldi	r26, 0x0F	; 15
- 7aa:	81 50       	subi	r24, 0x01	; 1
- 7ac:	90 40       	sbci	r25, 0x00	; 0
- 7ae:	a0 40       	sbci	r26, 0x00	; 0
- 7b0:	e1 f7       	brne	.-8      	; 0x7aa <State2+0x92>
- 7b2:	00 c0       	rjmp	.+0      	; 0x7b4 <State2+0x9c>
- 7b4:	00 00       	nop
+ 76e:	83 e0       	ldi	r24, 0x03	; 3
+ 770:	80 93 6b 00 	sts	0x006B, r24
+ 774:	8f e3       	ldi	r24, 0x3F	; 63
+ 776:	92 e4       	ldi	r25, 0x42	; 66
+ 778:	af e0       	ldi	r26, 0x0F	; 15
+ 77a:	81 50       	subi	r24, 0x01	; 1
+ 77c:	90 40       	sbci	r25, 0x00	; 0
+ 77e:	a0 40       	sbci	r26, 0x00	; 0
+ 780:	e1 f7       	brne	.-8      	; 0x77a <State2+0x6e>
+ 782:	00 c0       	rjmp	.+0      	; 0x784 <State2+0x78>
+ 784:	00 00       	nop
 		_delay_ms(500);
 	}
 	
 	if((MotorStopTime!=0)&&(Key2))
- 7b6:	70 91 82 00 	lds	r23, 0x0082
- 7ba:	60 91 83 00 	lds	r22, 0x0083
- 7be:	50 91 84 00 	lds	r21, 0x0084
- 7c2:	40 91 85 00 	lds	r20, 0x0085
- 7c6:	30 91 86 00 	lds	r19, 0x0086
- 7ca:	20 91 87 00 	lds	r18, 0x0087
- 7ce:	90 91 88 00 	lds	r25, 0x0088
- 7d2:	e0 91 89 00 	lds	r30, 0x0089
- 7d6:	87 2f       	mov	r24, r23
- 7d8:	86 2b       	or	r24, r22
- 7da:	85 2b       	or	r24, r21
- 7dc:	84 2b       	or	r24, r20
- 7de:	83 2b       	or	r24, r19
- 7e0:	82 2b       	or	r24, r18
- 7e2:	89 2b       	or	r24, r25
- 7e4:	8e 2b       	or	r24, r30
- 7e6:	09 f4       	brne	.+2      	; 0x7ea <State2+0xd2>
- 7e8:	91 c0       	rjmp	.+290    	; 0x90c <State2+0x1f4>
- 7ea:	85 9b       	sbis	0x10, 5	; 16
- 7ec:	8f c0       	rjmp	.+286    	; 0x90c <State2+0x1f4>
+ 786:	70 91 78 00 	lds	r23, 0x0078
+ 78a:	60 91 79 00 	lds	r22, 0x0079
+ 78e:	50 91 7a 00 	lds	r21, 0x007A
+ 792:	40 91 7b 00 	lds	r20, 0x007B
+ 796:	30 91 7c 00 	lds	r19, 0x007C
+ 79a:	20 91 7d 00 	lds	r18, 0x007D
+ 79e:	90 91 7e 00 	lds	r25, 0x007E
+ 7a2:	e0 91 7f 00 	lds	r30, 0x007F
+ 7a6:	87 2f       	mov	r24, r23
+ 7a8:	86 2b       	or	r24, r22
+ 7aa:	85 2b       	or	r24, r21
+ 7ac:	84 2b       	or	r24, r20
+ 7ae:	83 2b       	or	r24, r19
+ 7b0:	82 2b       	or	r24, r18
+ 7b2:	89 2b       	or	r24, r25
+ 7b4:	8e 2b       	or	r24, r30
+ 7b6:	09 f4       	brne	.+2      	; 0x7ba <State2+0xae>
+ 7b8:	8f c0       	rjmp	.+286    	; 0x8d8 <State2+0x1cc>
+ 7ba:	85 9b       	sbis	0x10, 5	; 16
+ 7bc:	8d c0       	rjmp	.+282    	; 0x8d8 <State2+0x1cc>
 	{
 		if(Time>(MotorStopTime+AutocloseDelay))
- 7ee:	d0 90 6b 00 	lds	r13, 0x006B
- 7f2:	e0 90 6c 00 	lds	r14, 0x006C
- 7f6:	f0 90 6d 00 	lds	r15, 0x006D
- 7fa:	00 91 6e 00 	lds	r16, 0x006E
- 7fe:	10 91 6f 00 	lds	r17, 0x006F
- 802:	d0 91 70 00 	lds	r29, 0x0070
- 806:	c0 91 71 00 	lds	r28, 0x0071
- 80a:	a0 91 72 00 	lds	r26, 0x0072
- 80e:	b7 2f       	mov	r27, r23
- 810:	b8 51       	subi	r27, 0x18	; 24
- 812:	f1 e0       	ldi	r31, 0x01	; 1
- 814:	b7 17       	cp	r27, r23
- 816:	08 f0       	brcs	.+2      	; 0x81a <State2+0x102>
- 818:	f0 e0       	ldi	r31, 0x00	; 0
- 81a:	86 2f       	mov	r24, r22
- 81c:	88 5f       	subi	r24, 0xF8	; 248
- 81e:	71 e0       	ldi	r23, 0x01	; 1
- 820:	86 17       	cp	r24, r22
- 822:	08 f0       	brcs	.+2      	; 0x826 <State2+0x10e>
- 824:	70 e0       	ldi	r23, 0x00	; 0
- 826:	6f 2f       	mov	r22, r31
- 828:	68 0f       	add	r22, r24
- 82a:	f1 e0       	ldi	r31, 0x01	; 1
- 82c:	68 17       	cp	r22, r24
- 82e:	08 f0       	brcs	.+2      	; 0x832 <State2+0x11a>
- 830:	f0 e0       	ldi	r31, 0x00	; 0
- 832:	7f 2b       	or	r23, r31
- 834:	86 2f       	mov	r24, r22
- 836:	f5 2f       	mov	r31, r21
- 838:	60 e0       	ldi	r22, 0x00	; 0
- 83a:	57 0f       	add	r21, r23
- 83c:	71 e0       	ldi	r23, 0x01	; 1
- 83e:	5f 17       	cp	r21, r31
- 840:	08 f0       	brcs	.+2      	; 0x844 <State2+0x12c>
- 842:	70 e0       	ldi	r23, 0x00	; 0
- 844:	67 2b       	or	r22, r23
- 846:	f5 2f       	mov	r31, r21
- 848:	74 2f       	mov	r23, r20
- 84a:	50 e0       	ldi	r21, 0x00	; 0
- 84c:	46 0f       	add	r20, r22
- 84e:	61 e0       	ldi	r22, 0x01	; 1
- 850:	47 17       	cp	r20, r23
- 852:	08 f0       	brcs	.+2      	; 0x856 <State2+0x13e>
- 854:	60 e0       	ldi	r22, 0x00	; 0
- 856:	56 2b       	or	r21, r22
- 858:	74 2f       	mov	r23, r20
- 85a:	63 2f       	mov	r22, r19
- 85c:	40 e0       	ldi	r20, 0x00	; 0
- 85e:	35 0f       	add	r19, r21
- 860:	51 e0       	ldi	r21, 0x01	; 1
- 862:	36 17       	cp	r19, r22
- 864:	08 f0       	brcs	.+2      	; 0x868 <State2+0x150>
- 866:	50 e0       	ldi	r21, 0x00	; 0
- 868:	45 2b       	or	r20, r21
- 86a:	63 2f       	mov	r22, r19
- 86c:	52 2f       	mov	r21, r18
- 86e:	30 e0       	ldi	r19, 0x00	; 0
- 870:	24 0f       	add	r18, r20
- 872:	41 e0       	ldi	r20, 0x01	; 1
- 874:	25 17       	cp	r18, r21
- 876:	08 f0       	brcs	.+2      	; 0x87a <State2+0x162>
- 878:	40 e0       	ldi	r20, 0x00	; 0
- 87a:	34 2b       	or	r19, r20
- 87c:	52 2f       	mov	r21, r18
- 87e:	49 2f       	mov	r20, r25
- 880:	20 e0       	ldi	r18, 0x00	; 0
- 882:	93 0f       	add	r25, r19
- 884:	31 e0       	ldi	r19, 0x01	; 1
- 886:	94 17       	cp	r25, r20
- 888:	08 f0       	brcs	.+2      	; 0x88c <State2+0x174>
- 88a:	30 e0       	ldi	r19, 0x00	; 0
- 88c:	23 2b       	or	r18, r19
- 88e:	e2 0f       	add	r30, r18
- 890:	ea 17       	cp	r30, r26
- 892:	e0 f0       	brcs	.+56     	; 0x8cc <State2+0x1b4>
- 894:	ae 17       	cp	r26, r30
- 896:	d1 f5       	brne	.+116    	; 0x90c <State2+0x1f4>
- 898:	9c 17       	cp	r25, r28
- 89a:	c0 f0       	brcs	.+48     	; 0x8cc <State2+0x1b4>
- 89c:	c9 17       	cp	r28, r25
- 89e:	b1 f5       	brne	.+108    	; 0x90c <State2+0x1f4>
- 8a0:	5d 17       	cp	r21, r29
- 8a2:	a0 f0       	brcs	.+40     	; 0x8cc <State2+0x1b4>
- 8a4:	d5 17       	cp	r29, r21
- 8a6:	91 f5       	brne	.+100    	; 0x90c <State2+0x1f4>
- 8a8:	61 17       	cp	r22, r17
- 8aa:	80 f0       	brcs	.+32     	; 0x8cc <State2+0x1b4>
- 8ac:	16 17       	cp	r17, r22
- 8ae:	71 f5       	brne	.+92     	; 0x90c <State2+0x1f4>
- 8b0:	70 17       	cp	r23, r16
- 8b2:	60 f0       	brcs	.+24     	; 0x8cc <State2+0x1b4>
- 8b4:	07 17       	cp	r16, r23
- 8b6:	51 f5       	brne	.+84     	; 0x90c <State2+0x1f4>
- 8b8:	ff 15       	cp	r31, r15
- 8ba:	40 f0       	brcs	.+16     	; 0x8cc <State2+0x1b4>
- 8bc:	ff 16       	cp	r15, r31
- 8be:	31 f5       	brne	.+76     	; 0x90c <State2+0x1f4>
- 8c0:	8e 15       	cp	r24, r14
- 8c2:	20 f0       	brcs	.+8      	; 0x8cc <State2+0x1b4>
- 8c4:	e8 16       	cp	r14, r24
- 8c6:	11 f5       	brne	.+68     	; 0x90c <State2+0x1f4>
- 8c8:	bd 15       	cp	r27, r13
- 8ca:	00 f5       	brcc	.+64     	; 0x90c <State2+0x1f4>
+ 7be:	d0 90 61 00 	lds	r13, 0x0061
+ 7c2:	e0 90 62 00 	lds	r14, 0x0062
+ 7c6:	f0 90 63 00 	lds	r15, 0x0063
+ 7ca:	00 91 64 00 	lds	r16, 0x0064
+ 7ce:	10 91 65 00 	lds	r17, 0x0065
+ 7d2:	d0 91 66 00 	lds	r29, 0x0066
+ 7d6:	c0 91 67 00 	lds	r28, 0x0067
+ 7da:	a0 91 68 00 	lds	r26, 0x0068
+ 7de:	b7 2f       	mov	r27, r23
+ 7e0:	b8 51       	subi	r27, 0x18	; 24
+ 7e2:	f1 e0       	ldi	r31, 0x01	; 1
+ 7e4:	b7 17       	cp	r27, r23
+ 7e6:	08 f0       	brcs	.+2      	; 0x7ea <State2+0xde>
+ 7e8:	f0 e0       	ldi	r31, 0x00	; 0
+ 7ea:	86 2f       	mov	r24, r22
+ 7ec:	88 5f       	subi	r24, 0xF8	; 248
+ 7ee:	71 e0       	ldi	r23, 0x01	; 1
+ 7f0:	86 17       	cp	r24, r22
+ 7f2:	08 f0       	brcs	.+2      	; 0x7f6 <State2+0xea>
+ 7f4:	70 e0       	ldi	r23, 0x00	; 0
+ 7f6:	6f 2f       	mov	r22, r31
+ 7f8:	68 0f       	add	r22, r24
+ 7fa:	f1 e0       	ldi	r31, 0x01	; 1
+ 7fc:	68 17       	cp	r22, r24
+ 7fe:	08 f0       	brcs	.+2      	; 0x802 <State2+0xf6>
+ 800:	f0 e0       	ldi	r31, 0x00	; 0
+ 802:	7f 2b       	or	r23, r31
+ 804:	86 2f       	mov	r24, r22
+ 806:	f5 2f       	mov	r31, r21
+ 808:	60 e0       	ldi	r22, 0x00	; 0
+ 80a:	57 0f       	add	r21, r23
+ 80c:	71 e0       	ldi	r23, 0x01	; 1
+ 80e:	5f 17       	cp	r21, r31
+ 810:	08 f0       	brcs	.+2      	; 0x814 <State2+0x108>
+ 812:	70 e0       	ldi	r23, 0x00	; 0
+ 814:	67 2b       	or	r22, r23
+ 816:	f5 2f       	mov	r31, r21
+ 818:	74 2f       	mov	r23, r20
+ 81a:	50 e0       	ldi	r21, 0x00	; 0
+ 81c:	46 0f       	add	r20, r22
+ 81e:	61 e0       	ldi	r22, 0x01	; 1
+ 820:	47 17       	cp	r20, r23
+ 822:	08 f0       	brcs	.+2      	; 0x826 <State2+0x11a>
+ 824:	60 e0       	ldi	r22, 0x00	; 0
+ 826:	56 2b       	or	r21, r22
+ 828:	74 2f       	mov	r23, r20
+ 82a:	63 2f       	mov	r22, r19
+ 82c:	40 e0       	ldi	r20, 0x00	; 0
+ 82e:	35 0f       	add	r19, r21
+ 830:	51 e0       	ldi	r21, 0x01	; 1
+ 832:	36 17       	cp	r19, r22
+ 834:	08 f0       	brcs	.+2      	; 0x838 <State2+0x12c>
+ 836:	50 e0       	ldi	r21, 0x00	; 0
+ 838:	45 2b       	or	r20, r21
+ 83a:	63 2f       	mov	r22, r19
+ 83c:	52 2f       	mov	r21, r18
+ 83e:	30 e0       	ldi	r19, 0x00	; 0
+ 840:	24 0f       	add	r18, r20
+ 842:	41 e0       	ldi	r20, 0x01	; 1
+ 844:	25 17       	cp	r18, r21
+ 846:	08 f0       	brcs	.+2      	; 0x84a <State2+0x13e>
+ 848:	40 e0       	ldi	r20, 0x00	; 0
+ 84a:	34 2b       	or	r19, r20
+ 84c:	52 2f       	mov	r21, r18
+ 84e:	49 2f       	mov	r20, r25
+ 850:	20 e0       	ldi	r18, 0x00	; 0
+ 852:	93 0f       	add	r25, r19
+ 854:	31 e0       	ldi	r19, 0x01	; 1
+ 856:	94 17       	cp	r25, r20
+ 858:	08 f0       	brcs	.+2      	; 0x85c <State2+0x150>
+ 85a:	30 e0       	ldi	r19, 0x00	; 0
+ 85c:	23 2b       	or	r18, r19
+ 85e:	e2 0f       	add	r30, r18
+ 860:	ea 17       	cp	r30, r26
+ 862:	e0 f0       	brcs	.+56     	; 0x89c <State2+0x190>
+ 864:	ae 17       	cp	r26, r30
+ 866:	c1 f5       	brne	.+112    	; 0x8d8 <State2+0x1cc>
+ 868:	9c 17       	cp	r25, r28
+ 86a:	c0 f0       	brcs	.+48     	; 0x89c <State2+0x190>
+ 86c:	c9 17       	cp	r28, r25
+ 86e:	a1 f5       	brne	.+104    	; 0x8d8 <State2+0x1cc>
+ 870:	5d 17       	cp	r21, r29
+ 872:	a0 f0       	brcs	.+40     	; 0x89c <State2+0x190>
+ 874:	d5 17       	cp	r29, r21
+ 876:	81 f5       	brne	.+96     	; 0x8d8 <State2+0x1cc>
+ 878:	61 17       	cp	r22, r17
+ 87a:	80 f0       	brcs	.+32     	; 0x89c <State2+0x190>
+ 87c:	16 17       	cp	r17, r22
+ 87e:	61 f5       	brne	.+88     	; 0x8d8 <State2+0x1cc>
+ 880:	70 17       	cp	r23, r16
+ 882:	60 f0       	brcs	.+24     	; 0x89c <State2+0x190>
+ 884:	07 17       	cp	r16, r23
+ 886:	41 f5       	brne	.+80     	; 0x8d8 <State2+0x1cc>
+ 888:	ff 15       	cp	r31, r15
+ 88a:	40 f0       	brcs	.+16     	; 0x89c <State2+0x190>
+ 88c:	ff 16       	cp	r15, r31
+ 88e:	21 f5       	brne	.+72     	; 0x8d8 <State2+0x1cc>
+ 890:	8e 15       	cp	r24, r14
+ 892:	20 f0       	brcs	.+8      	; 0x89c <State2+0x190>
+ 894:	e8 16       	cp	r14, r24
+ 896:	01 f5       	brne	.+64     	; 0x8d8 <State2+0x1cc>
+ 898:	bd 15       	cp	r27, r13
+ 89a:	f0 f4       	brcc	.+60     	; 0x8d8 <State2+0x1cc>
 		{
-			TestTrigger=0;
- 8cc:	10 92 60 00 	sts	0x0060, r1
 			MotorStartTime=Time;
- 8d0:	d0 92 8a 00 	sts	0x008A, r13
- 8d4:	e0 92 8b 00 	sts	0x008B, r14
- 8d8:	f0 92 8c 00 	sts	0x008C, r15
- 8dc:	00 93 8d 00 	sts	0x008D, r16
- 8e0:	10 93 8e 00 	sts	0x008E, r17
- 8e4:	d0 93 8f 00 	sts	0x008F, r29
- 8e8:	c0 93 90 00 	sts	0x0090, r28
- 8ec:	a0 93 91 00 	sts	0x0091, r26
+ 89c:	d0 92 80 00 	sts	0x0080, r13
+ 8a0:	e0 92 81 00 	sts	0x0081, r14
+ 8a4:	f0 92 82 00 	sts	0x0082, r15
+ 8a8:	00 93 83 00 	sts	0x0083, r16
+ 8ac:	10 93 84 00 	sts	0x0084, r17
+ 8b0:	d0 93 85 00 	sts	0x0085, r29
+ 8b4:	c0 93 86 00 	sts	0x0086, r28
+ 8b8:	a0 93 87 00 	sts	0x0087, r26
 			StartMotor(Close);
- 8f0:	80 e0       	ldi	r24, 0x00	; 0
- 8f2:	f0 dd       	rcall	.-1056   	; 0x4d4 <StartMotor>
+ 8bc:	80 e0       	ldi	r24, 0x00	; 0
+ 8be:	0a de       	rcall	.-1004   	; 0x4d4 <StartMotor>
 			State=3;
- 8f4:	83 e0       	ldi	r24, 0x03	; 3
- 8f6:	80 93 75 00 	sts	0x0075, r24
- 8fa:	8f e3       	ldi	r24, 0x3F	; 63
- 8fc:	92 e4       	ldi	r25, 0x42	; 66
- 8fe:	af e0       	ldi	r26, 0x0F	; 15
- 900:	81 50       	subi	r24, 0x01	; 1
- 902:	90 40       	sbci	r25, 0x00	; 0
- 904:	a0 40       	sbci	r26, 0x00	; 0
- 906:	e1 f7       	brne	.-8      	; 0x900 <State2+0x1e8>
- 908:	00 c0       	rjmp	.+0      	; 0x90a <State2+0x1f2>
- 90a:	00 00       	nop
+ 8c0:	83 e0       	ldi	r24, 0x03	; 3
+ 8c2:	80 93 6b 00 	sts	0x006B, r24
+ 8c6:	8f e3       	ldi	r24, 0x3F	; 63
+ 8c8:	92 e4       	ldi	r25, 0x42	; 66
+ 8ca:	af e0       	ldi	r26, 0x0F	; 15
+ 8cc:	81 50       	subi	r24, 0x01	; 1
+ 8ce:	90 40       	sbci	r25, 0x00	; 0
+ 8d0:	a0 40       	sbci	r26, 0x00	; 0
+ 8d2:	e1 f7       	brne	.-8      	; 0x8cc <State2+0x1c0>
+ 8d4:	00 c0       	rjmp	.+0      	; 0x8d6 <State2+0x1ca>
+ 8d6:	00 00       	nop
 			_delay_ms(500);
 		}
 	}	
 }
- 90c:	df 91       	pop	r29
- 90e:	cf 91       	pop	r28
- 910:	1f 91       	pop	r17
- 912:	0f 91       	pop	r16
- 914:	ff 90       	pop	r15
- 916:	ef 90       	pop	r14
- 918:	df 90       	pop	r13
- 91a:	08 95       	ret
+ 8d8:	df 91       	pop	r29
+ 8da:	cf 91       	pop	r28
+ 8dc:	1f 91       	pop	r17
+ 8de:	0f 91       	pop	r16
+ 8e0:	ff 90       	pop	r15
+ 8e2:	ef 90       	pop	r14
+ 8e4:	df 90       	pop	r13
+ 8e6:	08 95       	ret
 
-0000091c <State3>:
+000008e8 <State3>:
 
 
 
 void State3(void) //closing
 {
 	if((RemoteAFlag)||(!OpenKey)||(!StopKey))
- 91c:	80 91 77 00 	lds	r24, 0x0077
- 920:	88 23       	and	r24, r24
- 922:	21 f4       	brne	.+8      	; 0x92c <State3+0x10>
- 924:	99 9b       	sbis	0x13, 1	; 19
- 926:	02 c0       	rjmp	.+4      	; 0x92c <State3+0x10>
- 928:	9a 99       	sbic	0x13, 2	; 19
- 92a:	31 c0       	rjmp	.+98     	; 0x98e <State3+0x72>
+ 8e8:	80 91 6d 00 	lds	r24, 0x006D
+ 8ec:	88 23       	and	r24, r24
+ 8ee:	21 f4       	brne	.+8      	; 0x8f8 <State3+0x10>
+ 8f0:	99 9b       	sbis	0x13, 1	; 19
+ 8f2:	02 c0       	rjmp	.+4      	; 0x8f8 <State3+0x10>
+ 8f4:	9a 99       	sbic	0x13, 2	; 19
+ 8f6:	2f c0       	rjmp	.+94     	; 0x956 <State3+0x6e>
 	{
-		TestTrigger=0;
- 92c:	10 92 60 00 	sts	0x0060, r1
 		RemoteAFlag=0;
- 930:	10 92 77 00 	sts	0x0077, r1
+ 8f8:	10 92 6d 00 	sts	0x006D, r1
 		MotorStopTime=Time;
- 934:	80 91 6b 00 	lds	r24, 0x006B
- 938:	80 93 82 00 	sts	0x0082, r24
- 93c:	80 91 6c 00 	lds	r24, 0x006C
- 940:	80 93 83 00 	sts	0x0083, r24
- 944:	80 91 6d 00 	lds	r24, 0x006D
- 948:	80 93 84 00 	sts	0x0084, r24
- 94c:	80 91 6e 00 	lds	r24, 0x006E
- 950:	80 93 85 00 	sts	0x0085, r24
- 954:	80 91 6f 00 	lds	r24, 0x006F
- 958:	80 93 86 00 	sts	0x0086, r24
- 95c:	80 91 70 00 	lds	r24, 0x0070
- 960:	80 93 87 00 	sts	0x0087, r24
- 964:	80 91 71 00 	lds	r24, 0x0071
- 968:	80 93 88 00 	sts	0x0088, r24
- 96c:	80 91 72 00 	lds	r24, 0x0072
- 970:	80 93 89 00 	sts	0x0089, r24
+ 8fc:	80 91 61 00 	lds	r24, 0x0061
+ 900:	80 93 78 00 	sts	0x0078, r24
+ 904:	80 91 62 00 	lds	r24, 0x0062
+ 908:	80 93 79 00 	sts	0x0079, r24
+ 90c:	80 91 63 00 	lds	r24, 0x0063
+ 910:	80 93 7a 00 	sts	0x007A, r24
+ 914:	80 91 64 00 	lds	r24, 0x0064
+ 918:	80 93 7b 00 	sts	0x007B, r24
+ 91c:	80 91 65 00 	lds	r24, 0x0065
+ 920:	80 93 7c 00 	sts	0x007C, r24
+ 924:	80 91 66 00 	lds	r24, 0x0066
+ 928:	80 93 7d 00 	sts	0x007D, r24
+ 92c:	80 91 67 00 	lds	r24, 0x0067
+ 930:	80 93 7e 00 	sts	0x007E, r24
+ 934:	80 91 68 00 	lds	r24, 0x0068
+ 938:	80 93 7f 00 	sts	0x007F, r24
 		StopMotor();
- 974:	aa dd       	rcall	.-1196   	; 0x4ca <StopMotor>
+ 93c:	c6 dd       	rcall	.-1140   	; 0x4ca <StopMotor>
 		State=2;
- 976:	82 e0       	ldi	r24, 0x02	; 2
- 978:	80 93 75 00 	sts	0x0075, r24
- 97c:	8f e3       	ldi	r24, 0x3F	; 63
- 97e:	92 e4       	ldi	r25, 0x42	; 66
- 980:	af e0       	ldi	r26, 0x0F	; 15
- 982:	81 50       	subi	r24, 0x01	; 1
- 984:	90 40       	sbci	r25, 0x00	; 0
- 986:	a0 40       	sbci	r26, 0x00	; 0
- 988:	e1 f7       	brne	.-8      	; 0x982 <State3+0x66>
- 98a:	00 c0       	rjmp	.+0      	; 0x98c <State3+0x70>
- 98c:	00 00       	nop
+ 93e:	82 e0       	ldi	r24, 0x02	; 2
+ 940:	80 93 6b 00 	sts	0x006B, r24
+ 944:	8f e3       	ldi	r24, 0x3F	; 63
+ 946:	92 e4       	ldi	r25, 0x42	; 66
+ 948:	af e0       	ldi	r26, 0x0F	; 15
+ 94a:	81 50       	subi	r24, 0x01	; 1
+ 94c:	90 40       	sbci	r25, 0x00	; 0
+ 94e:	a0 40       	sbci	r26, 0x00	; 0
+ 950:	e1 f7       	brne	.-8      	; 0x94a <State3+0x62>
+ 952:	00 c0       	rjmp	.+0      	; 0x954 <State3+0x6c>
+ 954:	00 00       	nop
 		_delay_ms(500);
 	}
 	
 	if(IRSensor)
- 98e:	86 9b       	sbis	0x10, 6	; 16
- 990:	3a c0       	rjmp	.+116    	; 0xa06 <State3+0xea>
+ 956:	86 9b       	sbis	0x10, 6	; 16
+ 958:	38 c0       	rjmp	.+112    	; 0x9ca <State3+0xe2>
 	{
-		TestTrigger=0;
- 992:	10 92 60 00 	sts	0x0060, r1
 		StopMotor();
- 996:	99 dd       	rcall	.-1230   	; 0x4ca <StopMotor>
- 998:	8f e3       	ldi	r24, 0x3F	; 63
- 99a:	92 e4       	ldi	r25, 0x42	; 66
- 99c:	af e0       	ldi	r26, 0x0F	; 15
- 99e:	81 50       	subi	r24, 0x01	; 1
- 9a0:	90 40       	sbci	r25, 0x00	; 0
- 9a2:	a0 40       	sbci	r26, 0x00	; 0
- 9a4:	e1 f7       	brne	.-8      	; 0x99e <State3+0x82>
- 9a6:	00 c0       	rjmp	.+0      	; 0x9a8 <State3+0x8c>
- 9a8:	00 00       	nop
+ 95a:	b7 dd       	rcall	.-1170   	; 0x4ca <StopMotor>
+ 95c:	8f e3       	ldi	r24, 0x3F	; 63
+ 95e:	92 e4       	ldi	r25, 0x42	; 66
+ 960:	af e0       	ldi	r26, 0x0F	; 15
+ 962:	81 50       	subi	r24, 0x01	; 1
+ 964:	90 40       	sbci	r25, 0x00	; 0
+ 966:	a0 40       	sbci	r26, 0x00	; 0
+ 968:	e1 f7       	brne	.-8      	; 0x962 <State3+0x7a>
+ 96a:	00 c0       	rjmp	.+0      	; 0x96c <State3+0x84>
+ 96c:	00 00       	nop
 		_delay_ms(500);
 		MotorStartTime=Time;
- 9aa:	80 91 6b 00 	lds	r24, 0x006B
- 9ae:	80 93 8a 00 	sts	0x008A, r24
- 9b2:	80 91 6c 00 	lds	r24, 0x006C
- 9b6:	80 93 8b 00 	sts	0x008B, r24
- 9ba:	80 91 6d 00 	lds	r24, 0x006D
- 9be:	80 93 8c 00 	sts	0x008C, r24
- 9c2:	80 91 6e 00 	lds	r24, 0x006E
- 9c6:	80 93 8d 00 	sts	0x008D, r24
- 9ca:	80 91 6f 00 	lds	r24, 0x006F
- 9ce:	80 93 8e 00 	sts	0x008E, r24
- 9d2:	80 91 70 00 	lds	r24, 0x0070
- 9d6:	80 93 8f 00 	sts	0x008F, r24
- 9da:	80 91 71 00 	lds	r24, 0x0071
- 9de:	80 93 90 00 	sts	0x0090, r24
- 9e2:	80 91 72 00 	lds	r24, 0x0072
- 9e6:	80 93 91 00 	sts	0x0091, r24
+ 96e:	80 91 61 00 	lds	r24, 0x0061
+ 972:	80 93 80 00 	sts	0x0080, r24
+ 976:	80 91 62 00 	lds	r24, 0x0062
+ 97a:	80 93 81 00 	sts	0x0081, r24
+ 97e:	80 91 63 00 	lds	r24, 0x0063
+ 982:	80 93 82 00 	sts	0x0082, r24
+ 986:	80 91 64 00 	lds	r24, 0x0064
+ 98a:	80 93 83 00 	sts	0x0083, r24
+ 98e:	80 91 65 00 	lds	r24, 0x0065
+ 992:	80 93 84 00 	sts	0x0084, r24
+ 996:	80 91 66 00 	lds	r24, 0x0066
+ 99a:	80 93 85 00 	sts	0x0085, r24
+ 99e:	80 91 67 00 	lds	r24, 0x0067
+ 9a2:	80 93 86 00 	sts	0x0086, r24
+ 9a6:	80 91 68 00 	lds	r24, 0x0068
+ 9aa:	80 93 87 00 	sts	0x0087, r24
 		StartMotor(Open);
- 9ea:	81 e0       	ldi	r24, 0x01	; 1
- 9ec:	73 dd       	rcall	.-1306   	; 0x4d4 <StartMotor>
- 9ee:	8f e3       	ldi	r24, 0x3F	; 63
- 9f0:	92 e4       	ldi	r25, 0x42	; 66
- 9f2:	af e0       	ldi	r26, 0x0F	; 15
- 9f4:	81 50       	subi	r24, 0x01	; 1
- 9f6:	90 40       	sbci	r25, 0x00	; 0
- 9f8:	a0 40       	sbci	r26, 0x00	; 0
- 9fa:	e1 f7       	brne	.-8      	; 0x9f4 <State3+0xd8>
- 9fc:	00 c0       	rjmp	.+0      	; 0x9fe <State3+0xe2>
- 9fe:	00 00       	nop
+ 9ae:	81 e0       	ldi	r24, 0x01	; 1
+ 9b0:	91 dd       	rcall	.-1246   	; 0x4d4 <StartMotor>
+ 9b2:	8f e3       	ldi	r24, 0x3F	; 63
+ 9b4:	92 e4       	ldi	r25, 0x42	; 66
+ 9b6:	af e0       	ldi	r26, 0x0F	; 15
+ 9b8:	81 50       	subi	r24, 0x01	; 1
+ 9ba:	90 40       	sbci	r25, 0x00	; 0
+ 9bc:	a0 40       	sbci	r26, 0x00	; 0
+ 9be:	e1 f7       	brne	.-8      	; 0x9b8 <State3+0xd0>
+ 9c0:	00 c0       	rjmp	.+0      	; 0x9c2 <State3+0xda>
+ 9c2:	00 00       	nop
 		_delay_ms(500);
 		State=1;
- a00:	81 e0       	ldi	r24, 0x01	; 1
- a02:	80 93 75 00 	sts	0x0075, r24
+ 9c4:	81 e0       	ldi	r24, 0x01	; 1
+ 9c6:	80 93 6b 00 	sts	0x006B, r24
 	}
 	
 	if(Time>(MotorStartTime+ActionTime))
- a06:	80 91 8a 00 	lds	r24, 0x008A
- a0a:	60 91 8b 00 	lds	r22, 0x008B
- a0e:	40 91 8c 00 	lds	r20, 0x008C
- a12:	30 91 8d 00 	lds	r19, 0x008D
- a16:	20 91 8e 00 	lds	r18, 0x008E
- a1a:	f0 91 8f 00 	lds	r31, 0x008F
- a1e:	e0 91 90 00 	lds	r30, 0x0090
- a22:	b0 91 91 00 	lds	r27, 0x0091
- a26:	a8 2f       	mov	r26, r24
- a28:	ac 58       	subi	r26, 0x8C	; 140
- a2a:	51 e0       	ldi	r21, 0x01	; 1
- a2c:	a8 17       	cp	r26, r24
- a2e:	08 f0       	brcs	.+2      	; 0xa32 <State3+0x116>
- a30:	50 e0       	ldi	r21, 0x00	; 0
- a32:	86 2f       	mov	r24, r22
- a34:	8c 5f       	subi	r24, 0xFC	; 252
- a36:	91 e0       	ldi	r25, 0x01	; 1
- a38:	86 17       	cp	r24, r22
- a3a:	08 f0       	brcs	.+2      	; 0xa3e <State3+0x122>
- a3c:	90 e0       	ldi	r25, 0x00	; 0
- a3e:	58 0f       	add	r21, r24
- a40:	61 e0       	ldi	r22, 0x01	; 1
- a42:	58 17       	cp	r21, r24
- a44:	08 f0       	brcs	.+2      	; 0xa48 <State3+0x12c>
- a46:	60 e0       	ldi	r22, 0x00	; 0
- a48:	96 2b       	or	r25, r22
- a4a:	85 2f       	mov	r24, r21
- a4c:	74 2f       	mov	r23, r20
- a4e:	50 e0       	ldi	r21, 0x00	; 0
- a50:	94 0f       	add	r25, r20
- a52:	41 e0       	ldi	r20, 0x01	; 1
- a54:	97 17       	cp	r25, r23
- a56:	08 f0       	brcs	.+2      	; 0xa5a <State3+0x13e>
- a58:	40 e0       	ldi	r20, 0x00	; 0
- a5a:	54 2b       	or	r21, r20
- a5c:	79 2f       	mov	r23, r25
- a5e:	40 e0       	ldi	r20, 0x00	; 0
- a60:	53 0f       	add	r21, r19
- a62:	91 e0       	ldi	r25, 0x01	; 1
- a64:	53 17       	cp	r21, r19
- a66:	08 f0       	brcs	.+2      	; 0xa6a <State3+0x14e>
- a68:	90 e0       	ldi	r25, 0x00	; 0
- a6a:	49 2b       	or	r20, r25
- a6c:	65 2f       	mov	r22, r21
- a6e:	52 2f       	mov	r21, r18
- a70:	30 e0       	ldi	r19, 0x00	; 0
- a72:	42 0f       	add	r20, r18
- a74:	21 e0       	ldi	r18, 0x01	; 1
- a76:	45 17       	cp	r20, r21
- a78:	08 f0       	brcs	.+2      	; 0xa7c <State3+0x160>
- a7a:	20 e0       	ldi	r18, 0x00	; 0
- a7c:	32 2b       	or	r19, r18
- a7e:	54 2f       	mov	r21, r20
- a80:	4f 2f       	mov	r20, r31
- a82:	20 e0       	ldi	r18, 0x00	; 0
- a84:	3f 0f       	add	r19, r31
- a86:	f1 e0       	ldi	r31, 0x01	; 1
- a88:	34 17       	cp	r19, r20
- a8a:	08 f0       	brcs	.+2      	; 0xa8e <State3+0x172>
- a8c:	f0 e0       	ldi	r31, 0x00	; 0
- a8e:	2f 2b       	or	r18, r31
- a90:	43 2f       	mov	r20, r19
- a92:	3e 2f       	mov	r19, r30
- a94:	90 e0       	ldi	r25, 0x00	; 0
- a96:	2e 0f       	add	r18, r30
- a98:	e1 e0       	ldi	r30, 0x01	; 1
- a9a:	23 17       	cp	r18, r19
- a9c:	08 f0       	brcs	.+2      	; 0xaa0 <State3+0x184>
- a9e:	e0 e0       	ldi	r30, 0x00	; 0
- aa0:	9e 2b       	or	r25, r30
- aa2:	32 2f       	mov	r19, r18
- aa4:	9b 0f       	add	r25, r27
- aa6:	20 91 72 00 	lds	r18, 0x0072
- aaa:	92 17       	cp	r25, r18
- aac:	50 f1       	brcs	.+84     	; 0xb02 <State3+0x1e6>
- aae:	29 17       	cp	r18, r25
- ab0:	f1 f5       	brne	.+124    	; 0xb2e <State3+0x212>
- ab2:	90 91 71 00 	lds	r25, 0x0071
- ab6:	39 17       	cp	r19, r25
- ab8:	20 f1       	brcs	.+72     	; 0xb02 <State3+0x1e6>
- aba:	93 17       	cp	r25, r19
- abc:	c1 f5       	brne	.+112    	; 0xb2e <State3+0x212>
- abe:	90 91 70 00 	lds	r25, 0x0070
- ac2:	49 17       	cp	r20, r25
- ac4:	f0 f0       	brcs	.+60     	; 0xb02 <State3+0x1e6>
- ac6:	94 17       	cp	r25, r20
- ac8:	91 f5       	brne	.+100    	; 0xb2e <State3+0x212>
- aca:	90 91 6f 00 	lds	r25, 0x006F
- ace:	59 17       	cp	r21, r25
- ad0:	c0 f0       	brcs	.+48     	; 0xb02 <State3+0x1e6>
- ad2:	95 17       	cp	r25, r21
- ad4:	61 f5       	brne	.+88     	; 0xb2e <State3+0x212>
- ad6:	90 91 6e 00 	lds	r25, 0x006E
- ada:	69 17       	cp	r22, r25
- adc:	90 f0       	brcs	.+36     	; 0xb02 <State3+0x1e6>
- ade:	96 17       	cp	r25, r22
- ae0:	31 f5       	brne	.+76     	; 0xb2e <State3+0x212>
- ae2:	90 91 6d 00 	lds	r25, 0x006D
- ae6:	79 17       	cp	r23, r25
- ae8:	60 f0       	brcs	.+24     	; 0xb02 <State3+0x1e6>
- aea:	97 17       	cp	r25, r23
- aec:	01 f5       	brne	.+64     	; 0xb2e <State3+0x212>
- aee:	90 91 6c 00 	lds	r25, 0x006C
- af2:	89 17       	cp	r24, r25
- af4:	30 f0       	brcs	.+12     	; 0xb02 <State3+0x1e6>
- af6:	98 17       	cp	r25, r24
- af8:	d1 f4       	brne	.+52     	; 0xb2e <State3+0x212>
- afa:	80 91 6b 00 	lds	r24, 0x006B
- afe:	a8 17       	cp	r26, r24
- b00:	b0 f4       	brcc	.+44     	; 0xb2e <State3+0x212>
+ 9ca:	80 91 80 00 	lds	r24, 0x0080
+ 9ce:	60 91 81 00 	lds	r22, 0x0081
+ 9d2:	40 91 82 00 	lds	r20, 0x0082
+ 9d6:	30 91 83 00 	lds	r19, 0x0083
+ 9da:	20 91 84 00 	lds	r18, 0x0084
+ 9de:	f0 91 85 00 	lds	r31, 0x0085
+ 9e2:	e0 91 86 00 	lds	r30, 0x0086
+ 9e6:	b0 91 87 00 	lds	r27, 0x0087
+ 9ea:	a8 2f       	mov	r26, r24
+ 9ec:	ac 58       	subi	r26, 0x8C	; 140
+ 9ee:	51 e0       	ldi	r21, 0x01	; 1
+ 9f0:	a8 17       	cp	r26, r24
+ 9f2:	08 f0       	brcs	.+2      	; 0x9f6 <State3+0x10e>
+ 9f4:	50 e0       	ldi	r21, 0x00	; 0
+ 9f6:	86 2f       	mov	r24, r22
+ 9f8:	8c 5f       	subi	r24, 0xFC	; 252
+ 9fa:	91 e0       	ldi	r25, 0x01	; 1
+ 9fc:	86 17       	cp	r24, r22
+ 9fe:	08 f0       	brcs	.+2      	; 0xa02 <State3+0x11a>
+ a00:	90 e0       	ldi	r25, 0x00	; 0
+ a02:	58 0f       	add	r21, r24
+ a04:	61 e0       	ldi	r22, 0x01	; 1
+ a06:	58 17       	cp	r21, r24
+ a08:	08 f0       	brcs	.+2      	; 0xa0c <State3+0x124>
+ a0a:	60 e0       	ldi	r22, 0x00	; 0
+ a0c:	96 2b       	or	r25, r22
+ a0e:	85 2f       	mov	r24, r21
+ a10:	74 2f       	mov	r23, r20
+ a12:	50 e0       	ldi	r21, 0x00	; 0
+ a14:	94 0f       	add	r25, r20
+ a16:	41 e0       	ldi	r20, 0x01	; 1
+ a18:	97 17       	cp	r25, r23
+ a1a:	08 f0       	brcs	.+2      	; 0xa1e <State3+0x136>
+ a1c:	40 e0       	ldi	r20, 0x00	; 0
+ a1e:	54 2b       	or	r21, r20
+ a20:	79 2f       	mov	r23, r25
+ a22:	40 e0       	ldi	r20, 0x00	; 0
+ a24:	53 0f       	add	r21, r19
+ a26:	91 e0       	ldi	r25, 0x01	; 1
+ a28:	53 17       	cp	r21, r19
+ a2a:	08 f0       	brcs	.+2      	; 0xa2e <State3+0x146>
+ a2c:	90 e0       	ldi	r25, 0x00	; 0
+ a2e:	49 2b       	or	r20, r25
+ a30:	65 2f       	mov	r22, r21
+ a32:	52 2f       	mov	r21, r18
+ a34:	30 e0       	ldi	r19, 0x00	; 0
+ a36:	42 0f       	add	r20, r18
+ a38:	21 e0       	ldi	r18, 0x01	; 1
+ a3a:	45 17       	cp	r20, r21
+ a3c:	08 f0       	brcs	.+2      	; 0xa40 <State3+0x158>
+ a3e:	20 e0       	ldi	r18, 0x00	; 0
+ a40:	32 2b       	or	r19, r18
+ a42:	54 2f       	mov	r21, r20
+ a44:	4f 2f       	mov	r20, r31
+ a46:	20 e0       	ldi	r18, 0x00	; 0
+ a48:	3f 0f       	add	r19, r31
+ a4a:	f1 e0       	ldi	r31, 0x01	; 1
+ a4c:	34 17       	cp	r19, r20
+ a4e:	08 f0       	brcs	.+2      	; 0xa52 <State3+0x16a>
+ a50:	f0 e0       	ldi	r31, 0x00	; 0
+ a52:	2f 2b       	or	r18, r31
+ a54:	43 2f       	mov	r20, r19
+ a56:	3e 2f       	mov	r19, r30
+ a58:	90 e0       	ldi	r25, 0x00	; 0
+ a5a:	2e 0f       	add	r18, r30
+ a5c:	e1 e0       	ldi	r30, 0x01	; 1
+ a5e:	23 17       	cp	r18, r19
+ a60:	08 f0       	brcs	.+2      	; 0xa64 <State3+0x17c>
+ a62:	e0 e0       	ldi	r30, 0x00	; 0
+ a64:	9e 2b       	or	r25, r30
+ a66:	32 2f       	mov	r19, r18
+ a68:	9b 0f       	add	r25, r27
+ a6a:	20 91 68 00 	lds	r18, 0x0068
+ a6e:	92 17       	cp	r25, r18
+ a70:	50 f1       	brcs	.+84     	; 0xac6 <State3+0x1de>
+ a72:	29 17       	cp	r18, r25
+ a74:	e1 f5       	brne	.+120    	; 0xaee <State3+0x206>
+ a76:	90 91 67 00 	lds	r25, 0x0067
+ a7a:	39 17       	cp	r19, r25
+ a7c:	20 f1       	brcs	.+72     	; 0xac6 <State3+0x1de>
+ a7e:	93 17       	cp	r25, r19
+ a80:	b1 f5       	brne	.+108    	; 0xaee <State3+0x206>
+ a82:	90 91 66 00 	lds	r25, 0x0066
+ a86:	49 17       	cp	r20, r25
+ a88:	f0 f0       	brcs	.+60     	; 0xac6 <State3+0x1de>
+ a8a:	94 17       	cp	r25, r20
+ a8c:	81 f5       	brne	.+96     	; 0xaee <State3+0x206>
+ a8e:	90 91 65 00 	lds	r25, 0x0065
+ a92:	59 17       	cp	r21, r25
+ a94:	c0 f0       	brcs	.+48     	; 0xac6 <State3+0x1de>
+ a96:	95 17       	cp	r25, r21
+ a98:	51 f5       	brne	.+84     	; 0xaee <State3+0x206>
+ a9a:	90 91 64 00 	lds	r25, 0x0064
+ a9e:	69 17       	cp	r22, r25
+ aa0:	90 f0       	brcs	.+36     	; 0xac6 <State3+0x1de>
+ aa2:	96 17       	cp	r25, r22
+ aa4:	21 f5       	brne	.+72     	; 0xaee <State3+0x206>
+ aa6:	90 91 63 00 	lds	r25, 0x0063
+ aaa:	79 17       	cp	r23, r25
+ aac:	60 f0       	brcs	.+24     	; 0xac6 <State3+0x1de>
+ aae:	97 17       	cp	r25, r23
+ ab0:	f1 f4       	brne	.+60     	; 0xaee <State3+0x206>
+ ab2:	90 91 62 00 	lds	r25, 0x0062
+ ab6:	89 17       	cp	r24, r25
+ ab8:	30 f0       	brcs	.+12     	; 0xac6 <State3+0x1de>
+ aba:	98 17       	cp	r25, r24
+ abc:	c1 f4       	brne	.+48     	; 0xaee <State3+0x206>
+ abe:	80 91 61 00 	lds	r24, 0x0061
+ ac2:	a8 17       	cp	r26, r24
+ ac4:	a0 f4       	brcc	.+40     	; 0xaee <State3+0x206>
 	{
-		TestTrigger=0;
- b02:	10 92 60 00 	sts	0x0060, r1
 		LEDReset;
- b06:	94 9a       	sbi	0x12, 4	; 18
+ ac6:	94 9a       	sbi	0x12, 4	; 18
 		MotorStopTime=0;
- b08:	10 92 82 00 	sts	0x0082, r1
- b0c:	10 92 83 00 	sts	0x0083, r1
- b10:	10 92 84 00 	sts	0x0084, r1
- b14:	10 92 85 00 	sts	0x0085, r1
- b18:	10 92 86 00 	sts	0x0086, r1
- b1c:	10 92 87 00 	sts	0x0087, r1
- b20:	10 92 88 00 	sts	0x0088, r1
- b24:	10 92 89 00 	sts	0x0089, r1
+ ac8:	10 92 78 00 	sts	0x0078, r1
+ acc:	10 92 79 00 	sts	0x0079, r1
+ ad0:	10 92 7a 00 	sts	0x007A, r1
+ ad4:	10 92 7b 00 	sts	0x007B, r1
+ ad8:	10 92 7c 00 	sts	0x007C, r1
+ adc:	10 92 7d 00 	sts	0x007D, r1
+ ae0:	10 92 7e 00 	sts	0x007E, r1
+ ae4:	10 92 7f 00 	sts	0x007F, r1
 		StopMotor();
- b28:	d0 dc       	rcall	.-1632   	; 0x4ca <StopMotor>
+ ae8:	f0 dc       	rcall	.-1568   	; 0x4ca <StopMotor>
 		State=0;
- b2a:	10 92 75 00 	sts	0x0075, r1
- b2e:	08 95       	ret
+ aea:	10 92 6b 00 	sts	0x006B, r1
+ aee:	08 95       	ret
 
-00000b30 <StateManager>:
+00000af0 <StateManager>:
 
 
 
 void StateManager(void)
 {
   if(State==0)
- b30:	80 91 75 00 	lds	r24, 0x0075
- b34:	88 23       	and	r24, r24
- b36:	09 f4       	brne	.+2      	; 0xb3a <StateManager+0xa>
+ af0:	80 91 6b 00 	lds	r24, 0x006B
+ af4:	88 23       	and	r24, r24
+ af6:	09 f4       	brne	.+2      	; 0xafa <StateManager+0xa>
     State0();
- b38:	da dc       	rcall	.-1612   	; 0x4ee <State0>
+ af8:	fa dc       	rcall	.-1548   	; 0x4ee <State0>
   
   if(State==1)
- b3a:	80 91 75 00 	lds	r24, 0x0075
- b3e:	81 30       	cpi	r24, 0x01	; 1
- b40:	09 f4       	brne	.+2      	; 0xb44 <StateManager+0x14>
+ afa:	80 91 6b 00 	lds	r24, 0x006B
+ afe:	81 30       	cpi	r24, 0x01	; 1
+ b00:	09 f4       	brne	.+2      	; 0xb04 <StateManager+0x14>
 	State1();
- b42:	11 dd       	rcall	.-1502   	; 0x566 <State1>
+ b02:	2d dd       	rcall	.-1446   	; 0x55e <State1>
   
   if(State==2)
- b44:	80 91 75 00 	lds	r24, 0x0075
- b48:	82 30       	cpi	r24, 0x02	; 2
- b4a:	09 f4       	brne	.+2      	; 0xb4e <StateManager+0x1e>
+ b04:	80 91 6b 00 	lds	r24, 0x006B
+ b08:	82 30       	cpi	r24, 0x02	; 2
+ b0a:	09 f4       	brne	.+2      	; 0xb0e <StateManager+0x1e>
 	State2();
- b4c:	e5 dd       	rcall	.-1078   	; 0x718 <State2>
+ b0c:	ff dd       	rcall	.-1026   	; 0x70c <State2>
   
   if(State==3)
- b4e:	80 91 75 00 	lds	r24, 0x0075
- b52:	83 30       	cpi	r24, 0x03	; 3
- b54:	09 f4       	brne	.+2      	; 0xb58 <StateManager+0x28>
+ b0e:	80 91 6b 00 	lds	r24, 0x006B
+ b12:	83 30       	cpi	r24, 0x03	; 3
+ b14:	09 f4       	brne	.+2      	; 0xb18 <StateManager+0x28>
 	State3();	 	
- b56:	e2 de       	rcall	.-572    	; 0x91c <State3>
- b58:	08 95       	ret
+ b16:	e8 de       	rcall	.-560    	; 0x8e8 <State3>
+ b18:	08 95       	ret
 
-00000b5a <Flasher>:
+00000b1a <Flasher>:
 
 
 
 void Flasher(void)
 {
 	if(FlasherFlag)
- b5a:	80 91 74 00 	lds	r24, 0x0074
- b5e:	88 23       	and	r24, r24
- b60:	41 f0       	breq	.+16     	; 0xb72 <Flasher+0x18>
+ b1a:	80 91 6a 00 	lds	r24, 0x006A
+ b1e:	88 23       	and	r24, r24
+ b20:	41 f0       	breq	.+16     	; 0xb32 <Flasher+0x18>
 	{
 			if(FlasherState==0)
- b62:	80 91 73 00 	lds	r24, 0x0073
- b66:	88 23       	and	r24, r24
- b68:	11 f4       	brne	.+4      	; 0xb6e <Flasher+0x14>
+ b22:	80 91 69 00 	lds	r24, 0x0069
+ b26:	88 23       	and	r24, r24
+ b28:	11 f4       	brne	.+4      	; 0xb2e <Flasher+0x14>
 				{Relay3Reset;}		
- b6a:	97 98       	cbi	0x12, 7	; 18
- b6c:	08 95       	ret
+ b2a:	97 98       	cbi	0x12, 7	; 18
+ b2c:	08 95       	ret
 			else
 				{Relay3Set;}
- b6e:	97 9a       	sbi	0x12, 7	; 18
- b70:	08 95       	ret
+ b2e:	97 9a       	sbi	0x12, 7	; 18
+ b30:	08 95       	ret
 	}
 	else
 	{
 		Relay3Reset;FlasherState=0;
- b72:	97 98       	cbi	0x12, 7	; 18
- b74:	10 92 73 00 	sts	0x0073, r1
- b78:	08 95       	ret
+ b32:	97 98       	cbi	0x12, 7	; 18
+ b34:	10 92 69 00 	sts	0x0069, r1
+ b38:	08 95       	ret
 
-00000b7a <TestSequencer>:
-
-
-
-
-void TestSequencer(void)
-{
- b7a:	cf 92       	push	r12
- b7c:	df 92       	push	r13
- b7e:	ef 92       	push	r14
- b80:	ff 92       	push	r15
- b82:	0f 93       	push	r16
- b84:	1f 93       	push	r17
- b86:	cf 93       	push	r28
- b88:	df 93       	push	r29
-	
-	if(Time>=(LastAction+TestCycleTime))
- b8a:	c0 90 6b 00 	lds	r12, 0x006B
- b8e:	d0 90 6c 00 	lds	r13, 0x006C
- b92:	e0 90 6d 00 	lds	r14, 0x006D
- b96:	f0 90 6e 00 	lds	r15, 0x006E
- b9a:	00 91 6f 00 	lds	r16, 0x006F
- b9e:	10 91 70 00 	lds	r17, 0x0070
- ba2:	d0 91 71 00 	lds	r29, 0x0071
- ba6:	60 91 72 00 	lds	r22, 0x0072
- baa:	80 91 63 00 	lds	r24, 0x0063
- bae:	70 91 64 00 	lds	r23, 0x0064
- bb2:	40 91 65 00 	lds	r20, 0x0065
- bb6:	30 91 66 00 	lds	r19, 0x0066
- bba:	20 91 67 00 	lds	r18, 0x0067
- bbe:	a0 91 68 00 	lds	r26, 0x0068
- bc2:	f0 91 69 00 	lds	r31, 0x0069
- bc6:	c0 91 6a 00 	lds	r28, 0x006A
- bca:	b8 2f       	mov	r27, r24
- bcc:	b0 5f       	subi	r27, 0xF0	; 240
- bce:	51 e0       	ldi	r21, 0x01	; 1
- bd0:	b8 17       	cp	r27, r24
- bd2:	08 f0       	brcs	.+2      	; 0xbd6 <TestSequencer+0x5c>
- bd4:	50 e0       	ldi	r21, 0x00	; 0
- bd6:	87 2f       	mov	r24, r23
- bd8:	87 5a       	subi	r24, 0xA7	; 167
- bda:	91 e0       	ldi	r25, 0x01	; 1
- bdc:	87 17       	cp	r24, r23
- bde:	08 f0       	brcs	.+2      	; 0xbe2 <TestSequencer+0x68>
- be0:	90 e0       	ldi	r25, 0x00	; 0
- be2:	58 0f       	add	r21, r24
- be4:	71 e0       	ldi	r23, 0x01	; 1
- be6:	58 17       	cp	r21, r24
- be8:	08 f0       	brcs	.+2      	; 0xbec <TestSequencer+0x72>
- bea:	70 e0       	ldi	r23, 0x00	; 0
- bec:	97 2b       	or	r25, r23
- bee:	85 2f       	mov	r24, r21
- bf0:	e4 2f       	mov	r30, r20
- bf2:	50 e0       	ldi	r21, 0x00	; 0
- bf4:	94 0f       	add	r25, r20
- bf6:	41 e0       	ldi	r20, 0x01	; 1
- bf8:	9e 17       	cp	r25, r30
- bfa:	08 f0       	brcs	.+2      	; 0xbfe <TestSequencer+0x84>
- bfc:	40 e0       	ldi	r20, 0x00	; 0
- bfe:	54 2b       	or	r21, r20
- c00:	e9 2f       	mov	r30, r25
- c02:	40 e0       	ldi	r20, 0x00	; 0
- c04:	53 0f       	add	r21, r19
- c06:	91 e0       	ldi	r25, 0x01	; 1
- c08:	53 17       	cp	r21, r19
- c0a:	08 f0       	brcs	.+2      	; 0xc0e <TestSequencer+0x94>
- c0c:	90 e0       	ldi	r25, 0x00	; 0
- c0e:	49 2b       	or	r20, r25
- c10:	75 2f       	mov	r23, r21
- c12:	30 e0       	ldi	r19, 0x00	; 0
- c14:	42 0f       	add	r20, r18
- c16:	91 e0       	ldi	r25, 0x01	; 1
- c18:	42 17       	cp	r20, r18
- c1a:	08 f0       	brcs	.+2      	; 0xc1e <TestSequencer+0xa4>
- c1c:	90 e0       	ldi	r25, 0x00	; 0
- c1e:	39 2b       	or	r19, r25
- c20:	54 2f       	mov	r21, r20
- c22:	20 e0       	ldi	r18, 0x00	; 0
- c24:	3a 0f       	add	r19, r26
- c26:	91 e0       	ldi	r25, 0x01	; 1
- c28:	3a 17       	cp	r19, r26
- c2a:	08 f0       	brcs	.+2      	; 0xc2e <TestSequencer+0xb4>
- c2c:	90 e0       	ldi	r25, 0x00	; 0
- c2e:	29 2b       	or	r18, r25
- c30:	43 2f       	mov	r20, r19
- c32:	3f 2f       	mov	r19, r31
- c34:	90 e0       	ldi	r25, 0x00	; 0
- c36:	2f 0f       	add	r18, r31
- c38:	f1 e0       	ldi	r31, 0x01	; 1
- c3a:	23 17       	cp	r18, r19
- c3c:	08 f0       	brcs	.+2      	; 0xc40 <TestSequencer+0xc6>
- c3e:	f0 e0       	ldi	r31, 0x00	; 0
- c40:	9f 2b       	or	r25, r31
- c42:	9c 0f       	add	r25, r28
- c44:	69 17       	cp	r22, r25
- c46:	78 f1       	brcs	.+94     	; 0xca6 <TestSequencer+0x12c>
- c48:	96 17       	cp	r25, r22
- c4a:	d1 f4       	brne	.+52     	; 0xc80 <TestSequencer+0x106>
- c4c:	d2 17       	cp	r29, r18
- c4e:	58 f1       	brcs	.+86     	; 0xca6 <TestSequencer+0x12c>
- c50:	2d 17       	cp	r18, r29
- c52:	b1 f4       	brne	.+44     	; 0xc80 <TestSequencer+0x106>
- c54:	14 17       	cp	r17, r20
- c56:	38 f1       	brcs	.+78     	; 0xca6 <TestSequencer+0x12c>
- c58:	41 17       	cp	r20, r17
- c5a:	91 f4       	brne	.+36     	; 0xc80 <TestSequencer+0x106>
- c5c:	05 17       	cp	r16, r21
- c5e:	18 f1       	brcs	.+70     	; 0xca6 <TestSequencer+0x12c>
- c60:	50 17       	cp	r21, r16
- c62:	71 f4       	brne	.+28     	; 0xc80 <TestSequencer+0x106>
- c64:	f7 16       	cp	r15, r23
- c66:	f8 f0       	brcs	.+62     	; 0xca6 <TestSequencer+0x12c>
- c68:	7f 15       	cp	r23, r15
- c6a:	51 f4       	brne	.+20     	; 0xc80 <TestSequencer+0x106>
- c6c:	ee 16       	cp	r14, r30
- c6e:	d8 f0       	brcs	.+54     	; 0xca6 <TestSequencer+0x12c>
- c70:	ee 15       	cp	r30, r14
- c72:	31 f4       	brne	.+12     	; 0xc80 <TestSequencer+0x106>
- c74:	d8 16       	cp	r13, r24
- c76:	b8 f0       	brcs	.+46     	; 0xca6 <TestSequencer+0x12c>
- c78:	8d 15       	cp	r24, r13
- c7a:	11 f4       	brne	.+4      	; 0xc80 <TestSequencer+0x106>
- c7c:	cb 16       	cp	r12, r27
- c7e:	98 f0       	brcs	.+38     	; 0xca6 <TestSequencer+0x12c>
-	{
-		LastAction=Time;
- c80:	c0 92 63 00 	sts	0x0063, r12
- c84:	d0 92 64 00 	sts	0x0064, r13
- c88:	e0 92 65 00 	sts	0x0065, r14
- c8c:	f0 92 66 00 	sts	0x0066, r15
- c90:	00 93 67 00 	sts	0x0067, r16
- c94:	10 93 68 00 	sts	0x0068, r17
- c98:	d0 93 69 00 	sts	0x0069, r29
- c9c:	60 93 6a 00 	sts	0x006A, r22
-		TestTrigger=1;
- ca0:	81 e0       	ldi	r24, 0x01	; 1
- ca2:	80 93 60 00 	sts	0x0060, r24
-	}
-}
- ca6:	df 91       	pop	r29
- ca8:	cf 91       	pop	r28
- caa:	1f 91       	pop	r17
- cac:	0f 91       	pop	r16
- cae:	ff 90       	pop	r15
- cb0:	ef 90       	pop	r14
- cb2:	df 90       	pop	r13
- cb4:	cf 90       	pop	r12
- cb6:	08 95       	ret
-
-00000cb8 <main>:
+00000b3a <main>:
 int main(void)
 {
 	
 	static char state=0;
     
 	Startup();
- cb8:	f3 db       	rcall	.-2074   	; 0x4a0 <Startup>
+ b3a:	b2 dc       	rcall	.-1692   	; 0x4a0 <Startup>
 	LEDReset;
- cba:	94 9a       	sbi	0x12, 4	; 18
+ b3c:	94 9a       	sbi	0x12, 4	; 18
 	
 	
 	
 	while(1)
     {
 		Flasher(); 
- cbc:	4e df       	rcall	.-356    	; 0xb5a <Flasher>
-		StateManager();
- cbe:	38 df       	rcall	.-400    	; 0xb30 <StateManager>
-		TestSequencer();	
- cc0:	5c df       	rcall	.-328    	; 0xb7a <TestSequencer>
- cc2:	fc cf       	rjmp	.-8      	; 0xcbc <main+0x4>
+ b3e:	ed df       	rcall	.-38     	; 0xb1a <Flasher>
+		StateManager();		
+ b40:	d7 df       	rcall	.-82     	; 0xaf0 <StateManager>
+ b42:	fd cf       	rjmp	.-6      	; 0xb3e <main+0x4>
 
-00000cc4 <_exit>:
- cc4:	f8 94       	cli
+00000b44 <_exit>:
+ b44:	f8 94       	cli
 
-00000cc6 <__stop_program>:
- cc6:	ff cf       	rjmp	.-2      	; 0xcc6 <__stop_program>
+00000b46 <__stop_program>:
+ b46:	ff cf       	rjmp	.-2      	; 0xb46 <__stop_program>
