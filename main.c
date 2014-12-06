@@ -11,7 +11,7 @@
 #define ActionTime (38*30)
 #define FlasherDelay (38*1)
 #define AutocloseDelay (38*60)
-#define TestCycleTime (38*120)
+#define TestCycleTime (38*600)
 
 
 #include <avr/io.h>
@@ -22,8 +22,8 @@
 
 
 char RemoteAFlag=0,RemoteBFlag=0,State=0,FlasherFlag=0,FlasherState=0;
-unsigned long long Time=0,MotorStartTime,MotorStopTime;
-char TestTrigger=0;
+unsigned long long Time=0,MotorStartTime,MotorStopTime,LastAction=0;
+char TestTrigger=1;
 
 
 
@@ -216,12 +216,6 @@ void Flasher(void)
 
 void TestSequencer(void)
 {
-	static unsigned long long LastAction;
-	if(Time==0)
-	{
-		TestTrigger=1;
-		LastAction=Time;
-	}
 	
 	if(Time>=(LastAction+TestCycleTime))
 	{
