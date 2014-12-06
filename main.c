@@ -11,6 +11,7 @@
 #define ActionTime (38*30)
 #define FlasherDelay (38*1)
 #define AutocloseDelay (38*60)
+#define TestCycleTime (38*120)
 
 
 #include <avr/io.h>
@@ -22,6 +23,7 @@
 
 char RemoteAFlag=0,RemoteBFlag=0,State=0,FlasherFlag=0,FlasherState=0;
 unsigned long long Time=0,MotorStartTime,MotorStopTime;
+char TestTrigger=0;
 
 
 
@@ -60,7 +62,7 @@ void StartMotor(char dir)
 
 void State0(void) // closed
 {
-	if((RemoteAFlag)||(!OpenKey))
+	if((RemoteAFlag)||(!OpenKey)||(TestTrigger))
 	{
 		RemoteAFlag=0;
 		LEDSet;
@@ -85,6 +87,7 @@ void State1(void) //openning
 		StopMotor();
 		State=2;
 		_delay_ms(500);
+		TestTrigger=0;
 	}
 	
 	if(Time>(MotorStartTime+ActionTime))
@@ -104,8 +107,9 @@ void State1(void) //openning
 
 void State2(void) //open
 {
-	if((RemoteAFlag)||(!CloseKey))
+	if((RemoteAFlag)||(!CloseKey)||(TestTrigger))
 	{
+		if(TestTrigger) _delay_ms(500);
 		RemoteAFlag=0;
 		MotorStartTime=Time;
 		StartMotor(Close);
@@ -117,6 +121,7 @@ void State2(void) //open
 	{
 		if(Time>(MotorStopTime+AutocloseDelay))
 		{
+			TestTrigger=0;
 			MotorStartTime=Time;
 			StartMotor(Close);
 			State=3;
@@ -133,6 +138,7 @@ void State3(void) //closing
 {
 	if((RemoteAFlag)||(!OpenKey)||(!StopKey))
 	{
+		TestTrigger=0;
 		RemoteAFlag=0;
 		MotorStopTime=Time;
 		StopMotor();
@@ -142,6 +148,7 @@ void State3(void) //closing
 	
 	if(IRSensor)
 	{
+		TestTrigger=0;
 		StopMotor();
 		_delay_ms(500);
 		MotorStartTime=Time;
@@ -152,6 +159,7 @@ void State3(void) //closing
 	
 	if(Time>(MotorStartTime+ActionTime))
 	{
+		TestTrigger=0;
 		LEDReset;
 		MotorStopTime=0;
 		StopMotor();
@@ -206,6 +214,30 @@ void Flasher(void)
 
 
 
+void TestSequencer(void)
+{
+	static unsigned long long LastAction;
+	if(Time==0)
+	{
+		TestTrigger=1;
+		LastAction=Time;
+	}
+	
+	if(Time>=(LastAction+TestCycleTime))
+	{
+		LastAction=Time;
+		TestTrigger=1;
+	}
+}
+
+
+
+
+
+
+
+
+
 int main(void)
 {
 	
@@ -227,6 +259,7 @@ int main(void)
 	while(1)
     {
 		Flasher(); 
-		StateManager();		
+		StateManager();
+		TestSequencer();	
     }
 }
