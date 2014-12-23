@@ -11,7 +11,7 @@
 #define ActionTime (38*30)
 #define FlasherDelay (38*1)
 #define AutocloseDelay (38*60)
-#define TestCycleTime (38*900)
+#define TestCycleTime ((unsigned long long)(34200)) //38*900
 #define OffDelay (3000)
 
 
