@@ -11,7 +11,8 @@
 #define ActionTime (38*30)
 #define FlasherDelay (38*1)
 #define AutocloseDelay (38*60)
-#define TestCycleTime (38*600)
+#define TestCycleTime (38*900)
+#define OffDelay (3000)
 
 
 #include <avr/io.h>
@@ -109,7 +110,7 @@ void State2(void) //open
 {
 	if((RemoteAFlag)||(!CloseKey)||(TestTrigger))
 	{
-		if(TestTrigger) _delay_ms(500);
+		if(TestTrigger) _delay_ms(OffDelay);
 		RemoteAFlag=0;
 		MotorStartTime=Time;
 		StartMotor(Close);
